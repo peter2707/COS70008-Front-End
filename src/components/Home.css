@@ -1,0 +1,85 @@
+.home-container {
+    font-family: "Arial", sans-serif;
+}
+
+.hero-section {
+    background: burlywood no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+}
+
+.hero-headline {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin: 0 auto 2rem;
+}
+
+.hero-button {
+    background-color: #f04;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hero-button:hover {
+    background-color: #c03;
+}
+
+.normal-section {
+    padding: 50px 0;
+    background-color: #f4f4f4;
+    margin-bottom: 1rem;
+}
+
+.normal-section:nth-child(even) {
+    background-color: #e4e4e4;
+}
+
+.articles-section,
+.product-section,
+.community-section,
+.faqs-section,
+.email-section {
+    padding: 50px 0;
+}
+
+.articles-grid {
+    display: flex;
+    gap: 2rem;
+}
+
+.article-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 200px;
+}
+
+.product-section,
+.community-section {
+    display: flex;
+}
+
+.product-content,
+.community-content {
+    width: 50%;
+}
+
+.faqs-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.email-section form {
+    display: flex;
+    gap: 1rem;
+}
