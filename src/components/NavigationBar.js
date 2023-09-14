@@ -1,9 +1,26 @@
-import React from 'react'
+import React from "react";
+import "./NavigationBar.css";
 
 const NavigationBar = () => {
-  return (
-    <div>NavigationBar</div>
-  )
-}
+    return (
+        <div className="navbar-container">
+            <div className="navbar-logo">
+                <img src="path-to-your-logo.png" alt="Logo" />
+            </div>
 
-export default NavigationBar
+            <div className="navbar-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/learn">Learn</a>
+                <a href="/support">Support</a>
+                <a href="/admin">Admin</a>
+            </div>
+
+            <div className="navbar-profile">
+                <a href="/profile">Profile</a>
+            </div>
+        </div>
+    );
+};
+
+export default NavigationBar;
