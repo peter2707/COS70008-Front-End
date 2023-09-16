@@ -3,24 +3,25 @@ import "./NavigationBar.css";
 
 const NavigationBar = () => {
   return (
-    <div className="navbar-container">
-      <p class="text-2xl font-bold underline">Hello world!</p>
-      <div className="navbar-logo">
-        <img src="path-to-your-logo.png" alt="Logo" />
-      </div>
+    <section className="section-container">
+      <div className="navbar-container">
+        <div className="navbar-logo">
+          <img src="path-to-your-logo.png" alt="Logo" />
+        </div>
 
-      <div className="navbar-links">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/learn">Learn</a>
-        <a href="/support">Support</a>
-        <a href="/admin">Admin</a>
-      </div>
+        <div className="navbar-links">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/learn">Learn</a>
+          <a href="/support">Support</a>
+          <a href="/admin">Admin</a>
+        </div>
 
-      <div className="navbar-profile">
-        <a href="/profile">Profile</a>
+        <div className="navbar-profile">
+          <a href="/profile">Profile</a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
