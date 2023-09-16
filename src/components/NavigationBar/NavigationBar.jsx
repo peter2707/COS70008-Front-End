@@ -1,27 +1,104 @@
 import React from "react";
 import "./NavigationBar.css";
+import { FaUser } from "react-icons/fa";
+import { HiOutlineMenu } from "react-icons/hi";
+import { HiOutlineX } from "react-icons/hi";
+import { Disclosure } from "@headlessui/react";
+
+const navigation = [
+  {
+    name: "Home",
+    route: "/",
+    current: false,
+  },
+  {
+    name: "Learn",
+    route: "",
+    current: false,
+  },
+  {
+    name: "Support",
+    route: "",
+    current: false,
+  },
+  {
+    name: "About",
+    route: "/about",
+    current: false,
+  },
+];
 
 const NavigationBar = () => {
   return (
-    <section className="section-container">
-      <div className="navbar-container">
-        <div className="navbar-logo">
-          <img src="path-to-your-logo.png" alt="Logo" />
-        </div>
+    <Disclosure as="nav" role="navigation" className="bg-white">
+      {({ open }) => (
+        <>
+          <div className="navbar-container px-8">
+            <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+              {/* Mobile menu button*/}
+              <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2">
+                <span className="sr-only">Open main menu</span>
+                {open ? (
+                  <HiOutlineX className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <HiOutlineMenu className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </Disclosure.Button>
+            </div>
 
-        <div className="navbar-links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/learn">Learn</a>
-          <a href="/support">Support</a>
-          <a href="/admin">Admin</a>
-        </div>
+            <div className="nav-left">
+              <div className="navbar-logo">
+                <img src="logo192.png" alt="Logo" />
+                <span className="logo">Logo</span>
+              </div>
+            </div>
 
-        <div className="navbar-profile">
-          <a href="/profile">Profile</a>
-        </div>
-      </div>
-    </section>
+            <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="hidden mx-4 sm:ml-6 sm:block">
+                <div className="flex items-center justify-end">
+                  {navigation.map((item) => (
+                    <ul className="navbar-items" key={item.name}>
+                      <li>
+                        <a href={item.route}>{item.name}</a>
+                      </li>
+                    </ul>
+                  ))}
+
+                  <a
+                    className="p-3 ml-6 bg-blue-600 rounded-full"
+                    href="/profile"
+                  >
+                    <FaUser className="text-white text-lg" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navbar mobile */}
+          <Disclosure.Panel className="sm:hidden">
+            <div className="flex flex-col justify-center items-center mt-28 mx-auto">
+              <div className="w-full text-center">
+                {navigation.map((item) => (
+                  <ul className="navbar-items mobile" key={item.name}>
+                    <li>
+                      <a href={item.route}>{item.name}</a>
+                    </li>
+                  </ul>
+                ))}
+              </div>
+
+              <a
+                className="flex justify-center items-center px-10 py-3 my-4 gap-x-2 bg-blue-600 text-white rounded-full"
+                href="/profile"
+              >
+                <FaUser className="text-white text-xl" /> Login
+              </a>
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
   );
 };
 
