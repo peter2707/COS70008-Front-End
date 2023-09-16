@@ -16,17 +16,18 @@ code {
     monospace;
 }
 
-.section-container {
-  margin: 0 auto;
-}
-
-h1 {
+h1,
+.logo {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 72px;
   color: #000000;
+}
+
+.logo {
+  font-size: 24px;
 }
 
 h2,
@@ -69,7 +70,6 @@ p {
   line-height: 150%;
 }
 
-.nav-items,
 button {
   font-family: "Inter", sans-serif;
 }
@@ -77,11 +77,4 @@ button {
 button {
   font-size: 18px;
   font-weight: 600;
-}
-
-/* large desktop screens */
-@media screen and (min-width: 2000px) {
-  .section-container {
-    margin: 0px 320px;
-  }
 }
