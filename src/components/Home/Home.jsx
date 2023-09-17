@@ -1,10 +1,13 @@
 import React from "react";
 import "./Home.css";
+import HomepageHero from "./HomepageHero";
 
 const Home = () => {
     return (
         <div className="home-container">
             {/* Hero Section */}
+            <HomepageHero />
+
             <section className="hero-section">
                 <div className="hero-content">
                     <h1 className="hero-headline">Your Headline Here</h1>
