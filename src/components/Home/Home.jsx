@@ -8,18 +8,6 @@ const Home = () => {
             {/* Hero Section */}
             <HomepageHero />
 
-            <section className="hero-section">
-                <div className="hero-content">
-                    <h1 className="hero-headline">Your Headline Here</h1>
-                    <p className="hero-description">
-                        Your description goes here. Describe what makes your
-                        product or service unique and why visitors should be
-                        interested.
-                    </p>
-                    <button className="hero-button">Learn More</button>
-                </div>
-            </section>
-
             {/* 1st Section: Explore Articles by Category */}
             <section className="articles-section">
                 <h2>Explore Articles by Category</h2>
