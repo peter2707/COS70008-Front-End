@@ -1,26 +1,13 @@
 import React from "react";
 import "./Home.css";
 import HomepageHero from "./HomepageHero";
+import ExploreCategories from "./ExploreCategories";
 
 const Home = () => {
     return (
-        <div className="home-container">
-            {/* Hero Section */}
+        <div className="w-full lg:max-w-6xl mx-auto mt-24">
             <HomepageHero />
-
-            {/* 1st Section: Explore Articles by Category */}
-            <section className="articles-section">
-                <h2>Explore Articles by Category</h2>
-                <div className="articles-grid">
-                    {Array.from({ length: 4 }).map((_, index) => (
-                        <div key={index} className="article-card">
-                            <h3>Article {index + 1} Title</h3>
-                            <p>Article {index + 1} description...</p>
-                            <button>Learn More</button>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            <ExploreCategories />
 
             {/* 2nd Section: About the Product */}
             <section className="product-section">

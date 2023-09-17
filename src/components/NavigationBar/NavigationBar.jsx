@@ -65,7 +65,7 @@ const NavigationBar = () => {
                   ))}
 
                   <a
-                    className="p-3 ml-6 bg-blue-600 rounded-full"
+                    className="p-3 ml-6 bg-primary rounded-full"
                     href="/profile"
                   >
                     <FaUser className="text-white text-lg" />
@@ -89,7 +89,7 @@ const NavigationBar = () => {
               </div>
 
               <a
-                className="flex justify-center items-center px-10 py-3 my-4 gap-x-2 bg-blue-600 text-white rounded-full"
+                className="flex justify-center items-center px-10 py-3 my-4 gap-x-2 bg-primary text-white rounded-full"
                 href="/profile"
               >
                 <FaUser className="text-white text-xl" /> Login
