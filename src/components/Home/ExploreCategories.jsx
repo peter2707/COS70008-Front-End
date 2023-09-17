@@ -4,7 +4,7 @@ export default function ExploreCategories() {
     const cardColors = ["bg-customRed", "bg-customYello", "bg-customGreen", "bg-customPink"];
 
   return (
-    <section className="explore-categories mx-6 sm:mx-8">
+    <section className="explore-categories mx-6 sm:mx-8 mb-10 sm:mb-20">
       <div className="section-container">
         <div className="header-wrapper">
           <h1 className="leading-none">Explore Articles by Category</h1>

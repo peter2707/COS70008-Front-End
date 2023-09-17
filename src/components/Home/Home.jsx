@@ -2,26 +2,14 @@ import React from "react";
 import "./Home.css";
 import HomepageHero from "./HomepageHero";
 import ExploreCategories from "./ExploreCategories";
+import TestkitPurchase from "./TestkitPurchase";
 
 const Home = () => {
     return (
-        <div className="w-full lg:max-w-6xl mx-auto mt-24">
+        <div className="w-full lg:max-w-screen-2xl mx-auto mt-24">
             <HomepageHero />
             <ExploreCategories />
-
-            {/* 2nd Section: About the Product */}
-            <section className="product-section">
-                <div className="product-content">
-                    <h2>Product Title</h2>
-                    <ul>
-                        <li>Feature 1</li>
-                        <li>Feature 2</li>
-                        <li>Feature 3</li>
-                    </ul>
-                    <button>Buy Now</button>
-                </div>
-                <img src="path-to-product-image.jpg" alt="Product" />
-            </section>
+            <TestkitPurchase />
 
             {/* 3rd Section: Community */}
             <section className="community-section">
