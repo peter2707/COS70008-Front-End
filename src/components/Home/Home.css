@@ -1,50 +1,17 @@
-.normal-section {
-    padding: 50px 0;
-    background-color: #f4f4f4;
-    margin-bottom: 1rem;
-}
-
-.normal-section:nth-child(even) {
-    background-color: #e4e4e4;
-}
-
-.articles-section,
-.product-section,
-.community-section,
-.faqs-section,
-.email-section {
-    padding: 50px 0;
-}
-
-.articles-grid {
+.testkit-purchase .usp-list .usp-list-item {
     display: flex;
-    gap: 2rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
-.article-card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 200px;
+.usp-list-item .usp-description {
+    padding-left: 16px;
 }
 
-.product-section,
-.community-section {
-    display: flex;
-}
-
-.product-content,
-.community-content {
-    width: 50%;
-}
-
-.faqs-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-}
-
-.email-section form {
-    display: flex;
-    gap: 1rem;
+.usp-list-item img {
+    width: 40px;
+    height: 40px;
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HomepageHero() {
   return (
-    <section className="hero section-container mx-6 sm:mx-8">
+    <section className="hero mx-6 sm:mx-8 mb-10 sm:mb-20">
       <div className="w-full flex flex-wrap justify-center items-start py-24 sm:justify-between md:flex-nowrap">
         <div className="hero-left flex flex-col justify-center items-center w-full md:justify-between md:items-start md:w-1/2 h-full">
           <div className="title-wrapper text-center w-full sm:text-left">
