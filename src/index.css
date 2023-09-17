@@ -70,6 +70,18 @@ p {
   line-height: 150%;
 }
 
+.title {
+  font-size: 72px;
+}
+
+.subtitle {
+  color: #8c8c8c;
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%; /* 40.5px */
+}
+
 button {
   font-family: "Inter", sans-serif;
 }
