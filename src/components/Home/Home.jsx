@@ -3,6 +3,7 @@ import "./Home.css";
 import HomepageHero from "./HomepageHero";
 import ExploreCategories from "./ExploreCategories";
 import TestkitPurchase from "./TestkitPurchase";
+import CommunityParticipation from "./CommunityParticipation";
 
 const Home = () => {
     return (
@@ -10,17 +11,7 @@ const Home = () => {
             <HomepageHero />
             <ExploreCategories />
             <TestkitPurchase />
-
-            {/* 3rd Section: Community */}
-            <section className="community-section">
-                <img src="path-to-community-image.jpg" alt="Community" />
-                <div className="community-content">
-                    <h2>Our Community</h2>
-                    <h3>Subheadline about community</h3>
-                    <p>Description about the community...</p>
-                    <button>Learn More</button>
-                </div>
-            </section>
+            <CommunityParticipation />
 
             {/* 4th Section: FAQs */}
             <section className="faqs-section">

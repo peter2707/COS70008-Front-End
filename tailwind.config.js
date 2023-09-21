@@ -6,11 +6,16 @@ module.exports = {
       colors: {
         primary: "#1363FF",
         primaryLight: "#DDEDFF",
-        customRed: "#FFE7DD",
-        customYello: "#FFF6DB",
-        customGreen: "#E0F9E3",
-        customPink: "#F9ECFF",
+        lightRed: "#FFE7DD",
+        lightYello: "#FFF6DB",
+        lightGreen: "#E0F9E3",
+        lightPink: "#F9ECFF",
+        lightPurple: "#9BBFF5",
+        darkBlue: "#003C73"
       },
+      backgroundImage: {
+        'community-participation': "url('/public/assets/images/community-participation.jpg')",
+      }
     },
   },
   plugins: [],

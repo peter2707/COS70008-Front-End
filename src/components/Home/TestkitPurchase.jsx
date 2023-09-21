@@ -40,7 +40,7 @@ export default function TestkitPurchase() {
               </li>
             </li>
           </ul>
-          <div className="buttons-container">
+          <div className="buttons-container flex flex-row">
             <button className="bg-primary text-white py-3 px-6 rounded-full mr-4 hover:bg-blue-700">
               <a
                 className="inline-flex items-center "
