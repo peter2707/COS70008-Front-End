@@ -33,7 +33,7 @@ const NavigationBar = () => {
     <Disclosure as="nav" role="navigation" className="bg-white">
       {({ open }) => (
         <>
-          <div className="navbar-container px-8">
+          <div className="navbar-container px-8 z-10">
             <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
               <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2">
