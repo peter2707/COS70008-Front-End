@@ -89,6 +89,16 @@ button {
   font-weight: 600;
 }
 
+.link {
+  color: #1363ff;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #0046d3;
+}
+
 /* MOBILE AND SMALLER SCREENS" */
 @media screen and (max-width: 768px) {
   h1,

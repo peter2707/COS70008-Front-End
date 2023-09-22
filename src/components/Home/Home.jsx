@@ -4,6 +4,7 @@ import HomepageHero from "./HomepageHero";
 import ExploreCategories from "./ExploreCategories";
 import TestkitPurchase from "./TestkitPurchase";
 import CommunityParticipation from "./CommunityParticipation";
+import FAQs from "./FAQs";
 
 const Home = () => {
     return (
@@ -12,16 +13,7 @@ const Home = () => {
             <ExploreCategories />
             <TestkitPurchase />
             <CommunityParticipation />
-
-            {/* 4th Section: FAQs */}
-            <section className="faqs-section">
-                <div className="faqs-content">
-                    <h2>Frequently Asked Questions</h2>
-                    <a href="/faqs">See all FAQs</a>
-                    <h3>Most Common Question</h3>
-                    <p>Answer to the most common question...</p>
-                </div>
-            </section>
+            <FAQs />
 
             {/* 5th Section: Email Notification */}
             <section className="email-section">

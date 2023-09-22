@@ -1,17 +1,32 @@
 .testkit-purchase .usp-list .usp-list-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-top: 40px;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .usp-list-item .usp-description {
-    padding-left: 16px;
+  padding-left: 16px;
 }
 
 .usp-list-item img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease;
 }
