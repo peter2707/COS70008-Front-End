@@ -5,7 +5,7 @@ export default function CommunityParticipation() {
     <section className="community-participation mx-6 sm:mx-8 mb-10 sm:mb-20">
       <div className="cp-content-container w-full flex flex-row">
         <div className="relative cp-content-left bg-community-participation bg-cover bg-center sm:bg-none sm:bg-darkBlue w-full sm:w-3/4 p-8 flex-grow rounded-2xl sm:rounded-r-none sm:rounded-l-2xl">
-          <div className="absolute inset-0 backdrop-blur-sm rounded-2xl"></div>
+          <div className="absolute inset-0 backdrop-blur-sm sm:backdrop-blur-0 rounded-2xl"></div>
           <div className="relative cp-text-wrapper text-white">
             <h4 className="text-white font-extrabold mb-12">
               Community Participation
@@ -51,7 +51,7 @@ export default function CommunityParticipation() {
         </div>
 
         <div className="hidden sm:flex cp-content-right w-1/3 lg:w-2/4">
-          <div class="bg-community-participation bg-cover bg-center w-full rounded-e-2xl"></div>
+          <div className="bg-community-participation bg-cover bg-center w-full rounded-e-2xl"></div>
         </div>
       </div>
     </section>

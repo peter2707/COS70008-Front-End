@@ -20,16 +20,16 @@ export default function TestkitPurchase() {
               </div>
             </li>
             <li>
-              <li className="usp-list-item">
+              <div className="usp-list-item">
                 <img src="/assets/icons/like.svg" alt="reliable" />
                 <div className="usp-description">
                   <h6>Reliable result</h6>
                   <p>Peace of mind about your HIV status – accuracy assured.</p>
                 </div>
-              </li>
+              </div>
             </li>
             <li>
-              <li className="usp-list-item">
+              <div className="usp-list-item">
                 <img src="/assets/icons/pharmacy.svg" alt="catch early" />
                 <div className="usp-description">
                   <h6>Catch early - Timely detection matters</h6>
@@ -37,7 +37,7 @@ export default function TestkitPurchase() {
                     Helps you catch HIV early, manage with prompt intervention.
                   </p>
                 </div>
-              </li>
+              </div>
             </li>
           </ul>
           <div className="buttons-container flex flex-row">
