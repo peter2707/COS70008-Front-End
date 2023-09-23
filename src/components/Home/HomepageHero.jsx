@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function HomepageHero() {
   return (
@@ -12,9 +13,10 @@ export default function HomepageHero() {
               with a supportive community for shared experiences.
             </p>
           </div>
-          <button className="py-3 px-8 mt-8 rounded-full bg-primary text-white">
+          <Link to="/login" className="py-3 px-8 mt-8 rounded-full bg-primary text-white">
             Login now
-          </button>
+          </Link>
+          
         </div>
         <div className="hero-right w-full sm:max-w-lg mt-8 lg:mt-0 mx-auto">
           <img
