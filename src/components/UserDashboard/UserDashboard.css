@@ -1,0 +1,103 @@
+.dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.main-content {
+    flex: 4;
+    margin-right: 20px;
+}
+
+.record-section {
+    background-color: #ddedff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.primary-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.outline-btn {
+    background-color: transparent;
+    color: blue;
+    padding: 10px 15px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shortcut-section {
+    padding: 20px;
+}
+.articles {
+    display: grid;
+    grid-template-columns: repeat(
+        2,
+        1fr
+    ); /* Create two equally sized columns */
+    gap: 20px; /* Space between articles */
+}
+
+.expand-all-btn {
+    background-color: #eee;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.article-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.learn-more-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #D1D1D1;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.community-section{
+    padding: 20px;
+    background-color: #FFE7DD;
+    border-radius: 10px;
+}
+
+.community-section h6{
+    color: #C56941;
+}
+
+.email-notification-section{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #E0F9E3;
+    border-radius: 10px;
+}
+
+.email-notification-section h6{
+    color: #42A64D;
+}
