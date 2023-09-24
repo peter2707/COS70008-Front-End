@@ -5,6 +5,7 @@ import ExploreCategories from "./ExploreCategories";
 import TestkitPurchase from "./TestkitPurchase";
 import CommunityParticipation from "./CommunityParticipation";
 import FAQs from "./FAQs";
+import EmailReminder from "./EmailReminder";
 
 const Home = () => {
     return (
@@ -14,15 +15,7 @@ const Home = () => {
             <TestkitPurchase />
             <CommunityParticipation />
             <FAQs />
-
-            {/* 5th Section: Email Notification */}
-            <section className="email-section">
-                <h2>Email Notifications</h2>
-                <form>
-                    <input type="email" placeholder="Enter your email" />
-                    <button>Subscribe</button>
-                </form>
-            </section>
+            <EmailReminder />
         </div>
     );
 };
