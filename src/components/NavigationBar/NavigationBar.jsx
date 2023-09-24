@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const navigation = [
   {
     name: "Home",
-    route: "/",
+    route: "/home",
     current: false,
   },
   {
@@ -19,7 +19,7 @@ const navigation = [
   },
   {
     name: "Support",
-    route: "",
+    route: "/support",
     current: false,
   },
   {
@@ -60,9 +60,9 @@ const NavigationBar = () => {
                   {navigation.map((item) => (
                     <ul className="navbar-items" key={item.name}>
                       <li>
-                        <a className="px-4 md:px-6 py-9" href={item.route}>
+                        <Link className="px-4 md:px-6 py-9" to={item.route}>
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   ))}
