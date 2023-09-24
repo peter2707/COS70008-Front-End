@@ -13,7 +13,7 @@ export default function HomepageHero() {
               with a supportive community for shared experiences.
             </p>
           </div>
-          <Link to="/login" className="py-3 px-8 mt-8 rounded-full bg-primary text-white">
+          <Link to="/login" className="py-3 px-8 mt-8 rounded-full bg-primary text-white font-bold">
             Login now
           </Link>
           
