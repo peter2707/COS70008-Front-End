@@ -7,6 +7,8 @@ import LogIn from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import Layout from "./components/Layout";
+import Support from "./components/Support/Support";
+import Home from "./components/Home/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +16,8 @@ root.render(
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<App />} />
+                <Route path="home" element={<Home />} />
+                <Route path="support" element={<Support />} />
                 <Route path="login" element={<LogIn />} />
                 <Route path="register" element={<Register />} />
                 <Route path="userdashboard" element={<UserDashboard />} />
