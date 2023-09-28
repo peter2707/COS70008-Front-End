@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
+import FindNearby from "./FindNearby";
 
 export default function PositiveResult() {
   const todoSteps = [
@@ -56,6 +57,8 @@ export default function PositiveResult() {
           ))}
         </div>
       </div>
+
+      <FindNearby />
     </div>
   );
 }
