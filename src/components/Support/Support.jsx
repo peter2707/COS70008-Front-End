@@ -2,6 +2,7 @@ import React from 'react'
 import SupportHero from './SupportHero';
 import PostTestingGuidance from './PostTestingGuidance/PostTestingGuidance';
 import CommunityParticipationSupport from './CommunityParticipationSupport';
+import Hotlines from './Hotlines';
 
 const Support = () => {
     return (
@@ -9,6 +10,7 @@ const Support = () => {
             <SupportHero />
             <PostTestingGuidance />
             <CommunityParticipationSupport />
+            <Hotlines />
         </div>
     );
 };
