@@ -124,13 +124,6 @@ const emergencyHotlines = [
   },
 ];
 
-// Define a mapping of state names to colors
-const stateColors = {
-  VIC: "text-primary",
-  SYD: "text-purple-500",
-  TAS: "text-orange-500",
-};
-
 export default function Hotlines() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 

@@ -3,6 +3,7 @@ import SupportHero from './SupportHero';
 import PostTestingGuidance from './PostTestingGuidance/PostTestingGuidance';
 import CommunityParticipationSupport from './CommunityParticipationSupport';
 import Hotlines from './Hotlines';
+import SupportFaqs from './SupportFaqs';
 
 const Support = () => {
     return (
@@ -11,6 +12,7 @@ const Support = () => {
             <PostTestingGuidance />
             <CommunityParticipationSupport />
             <Hotlines />
+            <SupportFaqs />
         </div>
     );
 };
