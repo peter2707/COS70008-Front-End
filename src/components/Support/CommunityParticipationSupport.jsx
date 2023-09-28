@@ -29,7 +29,7 @@ export default function CommunityParticipationSupport() {
             </ul>
           </div>
 
-          <button className="text-base bg-white text-slate-900 rounded-full py-2 px-6">
+          <button className="text-base bg-white text-slate-900 rounded-full py-2 px-6 hover:bg-green-300 hover:text-white">
             Join now
           </button>
         </div>
