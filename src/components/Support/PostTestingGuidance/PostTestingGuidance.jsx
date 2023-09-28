@@ -40,7 +40,7 @@ export default function PostTestingGuidance() {
           </div>
         </div>
       </section>
-      <section className="bg-gray-100 mt-8 p-8">
+      <section className="bg-gray-100 mt-8 p-8 mb-16">
         {selectedIndex === 0 && <PositiveResult />}
         {selectedIndex === 1 && <NegativeResult />}
       </section>
