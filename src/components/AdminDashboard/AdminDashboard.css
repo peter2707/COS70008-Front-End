@@ -1,0 +1,82 @@
+.admin-container {
+    display: flex;
+}
+
+.adminSidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    padding: 15px 20px;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+    transition: width 0.3s ease;
+}
+
+.adminSidebar.collapsed {
+    width: 60px;
+}
+
+.adminSidebar h5 {
+    color: white;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.adminSidebar button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #7f8c8d;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.adminSidebar button.active, 
+.adminSidebar button:hover {
+    color: #ecf0f1;
+}
+
+.signout-btn {
+    position: absolute;
+    bottom: 20px;
+    width: 210px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Collapsible styles */
+.toggle-btn {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #34495e;
+    z-index: 2;
+    display: none;
+}
+
+.adminSidebar:not(.collapsed) .toggle-btn {
+    display: inline-block;
+    transform: none;
+}
+
+.adminSidebar.collapsed .toggle-btn {
+    transform: translate(-50%, -50%);
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+}
+
+.adminSidebar.collapsed h5,
+.adminSidebar.collapsed button:not(.toggle-btn) {
+    display: none;
+}
