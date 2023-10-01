@@ -1,0 +1,77 @@
+.admin-container {
+    display: flex;
+}
+
+.adminSidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    padding: 15px 20px;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.adminSidebar h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.adminSidebar button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #7f8c8d;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.adminSidebar button.active, 
+.adminSidebar button:hover {
+    color: #ecf0f1;
+}
+
+.signout-btn {
+    position: absolute;
+    bottom: 20px;
+    width: 210px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Collapsible styles */
+.toggle-btn {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #34495e;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: none;
+}
+
+.adminSidebar.collapsed .toggle-btn {
+    display: block;
+}
+
+.adminSidebar:not(.collapsed) .toggle-btn {
+    position: static;
+    transform: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.adminSidebar.collapsed h3,
+.adminSidebar.collapsed button:not(.toggle-btn) {
+    display: none;
+}
