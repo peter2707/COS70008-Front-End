@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AdminDashboard.css";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const AdminDashboard = () => {
     const [selected, setSelected] = useState("dashboard");
@@ -20,9 +21,9 @@ const AdminDashboard = () => {
                     className="toggle-btn"
                     onClick={() => setCollapsed(!collapsed)}
                 >
-                    {collapsed ? ">>" : "<<"}
+                    {collapsed ? <FaAngleRight className="text-xl" /> : <FaAngleLeft className="text-xl" />}
                 </button>
-                <h3>Admin Name</h3>
+                <h5>Admin Name</h5>
                 {sections.map((section) => (
                     <button
                         key={section.id}
@@ -35,10 +36,11 @@ const AdminDashboard = () => {
                 <button className="signout-btn">Sign Out</button>
             </div>
             <div className="main-content">
-                {/* Example: Display content based on selected section */}
                 {selected === "dashboard" && <div>Dashboard Content</div>}
                 {selected === "stats" && <div>Stats and Insight Content</div>}
-                {/* ... similarly for other sections */}
+                {selected === "content" && <div>Content Management</div>}
+                {selected === "email" && <div>Email Reminder</div>}
+                {selected === "account" && <div>Account Setting</div>}
             </div>
         </div>
     );
