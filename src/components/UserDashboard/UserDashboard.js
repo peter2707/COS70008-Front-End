@@ -5,10 +5,17 @@ const UserDashboard = () => {
     return (
         <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto">
             <div className="main-content">
+                <div className="header-content">
+                    <h1>Good Afternoon, [Name]</h1>
+                    <p>Wednesday, 30th August</p>
+                </div>
                 <div className="record-section">
                     <h1 className="text-primary">Next Periodic Test</h1>
                     <h3>Secondary Subtitle</h3>
-                    <p>Some text here</p>
+                    <br />
+                    <p>Last Recorded Test</p>
+                    <p>12th June | Negative</p>
+                    <br />
                     <button className="primary-btn">Primary Button</button>
                     <button className="outline-btn">Outline Button</button>
                 </div>
@@ -33,7 +40,7 @@ const UserDashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="sidebar">
+            <div className="sidebar bg-primaryLight">
                 <div className="community-section">
                     <h6>Community Participation</h6>
                     <p>Answer HIV questionaires</p>

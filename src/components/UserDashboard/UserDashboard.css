@@ -3,9 +3,12 @@
     justify-content: space-between;
     padding: 20px;
 }
+.header-content{
+    margin-bottom: 20px;
+}
 
 .main-content {
-    flex: 4;
+    width: 70%;
     margin-right: 20px;
 }
 
@@ -74,10 +77,8 @@
 }
 
 .sidebar {
-    flex: 1;
-    background-color: #D1D1D1;
+    width: 30%;
     padding: 20px;
-    border-left: 1px solid #ccc;
     border-radius: 10px;
 }
 

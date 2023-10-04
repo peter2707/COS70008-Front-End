@@ -16,7 +16,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="admin-container">
-            <div className={`adminSidebar ${collapsed ? "collapsed" : ""}`}>
+            <div className={`bg-primary adminSidebar ${collapsed ? "collapsed" : ""}`}>
                 <button
                     className="toggle-btn"
                     onClick={() => setCollapsed(!collapsed)}
