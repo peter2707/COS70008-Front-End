@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function ExploreCategories() {
-    const cardColors = ["bg-lightRed", "bg-lightYello", "bg-lightGreen", "bg-lightPink"];
+    const cardColors = ["bg-lightRed", "bg-lightYellow", "bg-lightGreen", "bg-lightPink"];
 
   return (
     <section className="explore-categories mx-6 sm:mx-8 mb-10 sm:mb-20">

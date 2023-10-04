@@ -1,13 +1,17 @@
 import React, { useCallback, useState, useMemo } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { IoWarning } from "react-icons/io5";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAP_APIKEY;
+// Define the libraries as a constant variable outside of the component
+// to ensure that the libraries prop doesn't change during component re-renders.
+const libraries = ["places"];
 
 export default function FindNearby() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
-    libraries: ["places"],
+    libraries: libraries,
     region: "AU",
     language: "en-AU",
   });
@@ -138,7 +142,7 @@ export default function FindNearby() {
         </p>
       </div>
 
-      <div className="searchbar-container w-1/2 mx-auto my-8">
+      <div className="searchbar-container w-full md:w-1/2 mx-auto my-8">
         <form id="places-searchbar">
           <div className="searchbar bg-white flex flex-row justify-between items-center p-2 rounded-xl">
             <input
@@ -147,6 +151,7 @@ export default function FindNearby() {
               className="w-full px-4 py-2 mr-4"
               type="number"
               placeholder="Enter your location postcode"
+              readonly
             />
             <button
               className="bg-primaryLight text-lg font-medium px-4 py-2 rounded-xl hover:text-white hover:bg-primary transition-colors duration-75"
@@ -160,47 +165,66 @@ export default function FindNearby() {
       </div>
 
       {isLoaded ? (
-        <div className="w-full">
-          <GoogleMap
-            className="map-container"
-            mapContainerStyle={{
-              width: "60%",
-              height: "350px",
-              borderRadius: "10px",
-              border: "1px solid",
-              margin: "0px auto",
-            }}
-            center={center}
-            zoom={10}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-            options={{ streetViewControl: false }}
-          >
-            {markers.map((marker, index) => (
-              <Marker key={index} position={marker.getPosition()} />
-            ))}
-            <></>
-          </GoogleMap>
+        <div className="w-full mx-auto">
+          <div className="w-full md:w-3/5 mx-auto">
+            <GoogleMap
+              className="map-container z-9"
+              mapContainerStyle={{
+                width: "100%",
+                height: "350px",
+                borderRadius: "10px",
+                boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+                margin: "0px auto",
+              }}
+              center={center}
+              zoom={10}
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+              options={{ streetViewControl: false }}
+            >
+              {markers.map((marker, index) => (
+                <Marker key={index} position={marker.getPosition()} />
+              ))}
+              <></>
+            </GoogleMap>
+          </div>
 
           {userInput !== "" ? (
-            <div className="w-full px-10 mt-8 mx-auto">
+            <div className="w-full px-0 md:px-10 mt-8 mx-auto">
               <h4>Results for {userInput}</h4>
-              <p>
-                The results below only showing nearby clinics and may not
-                contains HIV professional clinics. If you want to find a
-                prescriber for HIV, please use{" "}
-                <a
-                  className="link"
-                  href="https://ashm.org.au/prescriber-programs/find-a-prescriber/hiv-map/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  ASHM Prescriber Map.
-                </a>
-              </p>
+              <div className="bg-lightYellow p-4 rounded-lg flex items-center justify-start">
+                <span className="text-2xl text-yellow-400 mr-2">
+                  <IoWarning />
+                </span>
+                <p>
+                  The results below may not contains HIV professional clinics.
+                  If you want to find a prescriber for HIV, please use
+                  <a
+                    className="link ml-1"
+                    href="https://ashm.org.au/prescriber-programs/find-a-prescriber/hiv-map/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    ASHM Prescriber Map.
+                  </a>
+                </p>
+              </div>
 
-              <div className="result-container grid grid-cols-6 gap-4 mt-6">
+              <div className="result-container hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6">
                 {renderPlaceDetails()}
+              </div>
+
+              <div className="scroll-smooth w-full flex flex-col md:hidden mt-4 overflow-x-auto">
+                <div className="w-full flex space-x-4 snap-start scroll-ml-6">
+                  {renderPlaceDetails().map((place, index) => (
+                    <div
+                      key={index}
+                      className="place-detail p-2 bg-white rounded-lg w-56"
+                    >
+                      {place}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
