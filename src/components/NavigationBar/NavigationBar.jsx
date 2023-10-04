@@ -80,7 +80,7 @@ const NavigationBar = () => {
 
           {/* Navbar mobile */}
           <Disclosure.Panel className="sm:hidden">
-            <div className="nav-mobile mx-auto">
+            <div className="nav-mobile mx-auto z-10">
               <div className="w-full text-center">
                 {navigation.map((item) => (
                   <ul className="navbar-items mobile" key={item.name}>

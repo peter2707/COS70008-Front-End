@@ -7,7 +7,7 @@ module.exports = {
         primary: "#1363FF",
         primaryLight: "#DDEDFF",
         lightRed: "#FFE7DD",
-        lightYello: "#FFF6DB",
+        lightYellow: "#FFF6DB",
         lightGreen: "#E0F9E3",
         lightPink: "#F9ECFF",
         lightPurple: "#9BBFF5",

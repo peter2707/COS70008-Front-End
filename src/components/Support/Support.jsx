@@ -4,6 +4,7 @@ import PostTestingGuidance from './PostTestingGuidance/PostTestingGuidance';
 import CommunityParticipationSupport from './CommunityParticipationSupport';
 import Hotlines from './Hotlines';
 import SupportFaqs from './SupportFaqs';
+import "./Support.css";
 
 const Support = () => {
     return (
