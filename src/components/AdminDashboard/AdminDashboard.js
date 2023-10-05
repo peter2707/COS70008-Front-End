@@ -2,17 +2,35 @@ import React, { useState } from "react";
 import "./AdminDashboard.css";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
+// Import the individual components
+import { Dashboard } from './Dashboard';
+import { Users } from './Users';
+import { ContentManagement } from './ContentManagement';
+import { Email } from './Email';
+import { Account } from './Account';
+
 const AdminDashboard = () => {
     const [selected, setSelected] = useState("dashboard");
     const [collapsed, setCollapsed] = useState(false);
 
     const sections = [
         { id: "dashboard", name: "Dashboard" },
-        { id: "stats", name: "Stats and Insight" },
+        { id: "users", name: "Users" },
         { id: "content", name: "Content Management" },
         { id: "email", name: "Email Reminder" },
         { id: "account", name: "Account Setting" },
     ];
+
+    const renderContent = () => {
+        switch (selected) {
+            case "dashboard": return <Dashboard />;
+            case "users": return <Users />;
+            case "content": return <ContentManagement />;
+            case "email": return <Email />;
+            case "account": return <Account />;
+            default: return null;
+        }
+    };
 
     return (
         <div className="admin-container">
@@ -36,11 +54,7 @@ const AdminDashboard = () => {
                 <button className="signout-btn">Sign Out</button>
             </div>
             <div className="main-content">
-                {selected === "dashboard" && <div>Dashboard Content</div>}
-                {selected === "stats" && <div>Stats and Insight Content</div>}
-                {selected === "content" && <div>Content Management</div>}
-                {selected === "email" && <div>Email Reminder</div>}
-                {selected === "account" && <div>Account Setting</div>}
+                {renderContent()}
             </div>
         </div>
     );

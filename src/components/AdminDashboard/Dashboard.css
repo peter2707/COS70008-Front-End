@@ -1,0 +1,45 @@
+/* Dashboard.css */
+
+.dashboard-counts {
+    padding: 20px 0;
+    font-size: 0;
+}
+
+.user-count, .test-kit-count, .hiv-cases-count {
+    display: inline-block;
+    width: calc(33.33% - 20px);
+    vertical-align: top;
+    background-color: #f4f4f4; 
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 16px;
+}
+
+.user-count {
+    background-color: #E57373;
+}
+
+.test-kit-count {
+    background-color: #81C784;
+}
+
+.hiv-cases-count {
+    background-color: #64B5F6;
+}
+
+/* Style for the charts */
+.dashboard-charts, .web-traffic-stats .device-distribution, .web-traffic-stats .visitor-trends {
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .user-count, .test-kit-count, .hiv-cases-count {
+        display: block;
+        width: 100%;
+        margin: 10px 0; 
+    }
+}
