@@ -8,13 +8,13 @@ import "./Support.css";
 
 const Support = () => {
     return (
-        <div className="w-full lg:max-w-screen-2xl mx-auto mt-24">
+        <section className="w-full lg:max-w-screen-2xl mx-auto mt-24"> 
             <SupportHero />
             <PostTestingGuidance />
             <CommunityParticipationSupport />
             <Hotlines />
             <SupportFaqs />
-        </div>
+        </section>
     );
 };
 

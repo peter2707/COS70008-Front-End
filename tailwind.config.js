@@ -11,11 +11,12 @@ module.exports = {
         lightGreen: "#E0F9E3",
         lightPink: "#F9ECFF",
         lightPurple: "#9BBFF5",
-        darkBlue: "#003C73"
+        darkBlue: "#003C73",
       },
       backgroundImage: {
-        'community-participation': "url('/public/assets/images/community-participation.jpg')",
-      }
+        "community-participation":
+          "url('/public/assets/images/community-participation.jpg')",
+      },
     },
   },
   plugins: [],
