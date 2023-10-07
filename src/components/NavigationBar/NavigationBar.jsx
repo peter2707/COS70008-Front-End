@@ -14,7 +14,7 @@ const navigation = [
   },
   {
     name: "Learn",
-    route: "",
+    route: "/learn",
     current: false,
   },
   {
@@ -31,7 +31,7 @@ const navigation = [
 
 const NavigationBar = () => {
   return (
-    <Disclosure as="nav" role="navigation" className="bg-white">
+    <Disclosure as="nav" role="navigation" className="navbar w-full lg:max-w-screen-2xl mx-auto bg-white">
       {({ open }) => (
         <>
           <div className="navbar-container px-8 z-10">
