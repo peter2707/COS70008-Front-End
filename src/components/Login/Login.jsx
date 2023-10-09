@@ -86,8 +86,8 @@ export default function Login() {
 
   return (
     <section className="login flex justify-center items-center h-screen bg-white max-w-6xl mx-auto">
-      <div className="login-container w-full flex flex-row bg-white text-center shadow-lg rounded-2xl mx-8">
-        <div className="left w-full p-4 md:p-8 md:w-3/4 mx-auto">
+      <div className="login-container max-h-min flex flex-row bg-white text-center shadow-lg rounded-2xl mx-8">
+        <div className="left p-4 md:p-8 md:w-3/4 mx-auto">
           <div className="absolute bg-gray-100 p-2 rounded-md cursor-pointer hover:bg-primaryLight">
             <Link to="/">
               <img
@@ -98,20 +98,18 @@ export default function Login() {
               />
             </Link>
           </div>
-          <div className="header-wrapper mb-4">
+          <div className="header-wrapper">
             <h1 className="text-3xl px-20">Access Your Dashboard</h1>
-            <div className="mt-2">
-              <img
-                className="w-1/2 mx-auto"
-                src="assets/images/login.png"
-                alt="Login"
-              />
-            </div>
+            <img
+              className="w-1/2 mx-auto"
+              src="assets/images/login.svg"
+              alt="Login"
+            />
           </div>
 
           <form className="login-form text-left" onSubmit={handleLogin}>
             <div className="inputs-container">
-              <div className="email-input mb-2 p-2">                
+              <div className="email-input mb-4">
                 <input
                   type="text"
                   name="email"
@@ -128,7 +126,7 @@ export default function Login() {
                 )}
               </div>
 
-              <div className="password-input mb-2 p-2">
+              <div className="password-input mb-4">
                 <input
                   type="password"
                   name="password"
@@ -153,12 +151,12 @@ export default function Login() {
               </p>
             </div>
 
-            <div className="lower-content text-center mt-14 p-2">
-              <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-3 px-4">
+            <div className="lower-content text-center mt-4 p-2">
+              <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-2">
                 Log In
               </button>
 
-              <p className="text-sm my-8 text-gray-600">
+              <p className="text-sm mt-6 my-2 text-gray-600">
                 Don't have an account?
               </p>
 
