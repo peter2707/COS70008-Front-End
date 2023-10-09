@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -104,9 +103,10 @@ export default function Register() {
         <div className="absolute bg-gray-100 p-2 rounded-md cursor-pointer hover:bg-primaryLight">
           <Link to="/login">
             <img
+              title="Back to login"
               className="w-6 h-6"
               src="assets/icons/left-arrow.svg"
-              alt="Back to Home"
+              alt="Back to Login"
             />
           </Link>
         </div>
@@ -120,7 +120,7 @@ export default function Register() {
 
         <form className="register-form text-left" onSubmit={handleSignup}>
           <div className="inputs-container">
-            <div className="email-input p-2">
+            <div className="email-input mb-2 p-2">
               <input
                 type="text"
                 name="email"
@@ -128,7 +128,7 @@ export default function Register() {
                 value={email}
                 className={classNames(
                   "w-full bg-gray-100 text-sm rounded-md placeholder-gray-500 p-4",
-                  errors.email ? "border-red-500" : ""
+                  errors.email ? "border border-red-500" : ""
                 )}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -137,7 +137,7 @@ export default function Register() {
               )}
             </div>
 
-            <div className="password-input p-2">
+            <div className="password-input mb-2 p-2">
               <input
                 type="password"
                 name="password"
@@ -145,7 +145,7 @@ export default function Register() {
                 value={password}
                 className={classNames(
                   "w-full bg-gray-100 text-sm rounded-md placeholder-gray-500 p-4",
-                  errors.password ? "border-red-500" : ""
+                  errors.password ? "border border-red-500" : ""
                 )}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -154,7 +154,7 @@ export default function Register() {
               )}
             </div>
 
-            <div className="confirm-password-input p-2">
+            <div className="confirm-password-input mb-2 p-2">
               <input
                 type="password"
                 name="password"
@@ -162,7 +162,7 @@ export default function Register() {
                 value={confirmPassword}
                 className={classNames(
                   "w-full bg-gray-100 text-sm rounded-md placeholder-gray-500 p-4",
-                  errors.password ? "border-red-500" : ""
+                  errors.password ? "border border-red-500" : ""
                 )}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -179,7 +179,7 @@ export default function Register() {
           </div>
 
           <div className="lower-content text-center mt-14 p-2">
-            <button className="w-full bg-primary hover:bg-blue-600 text-white text-sm font-medium text-center rounded-full py-3 px-4">
+            <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-full py-3 px-4">
               Sign Up
             </button>
 
