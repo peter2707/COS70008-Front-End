@@ -48,10 +48,12 @@ const NavigationBar = () => {
             </div>
 
             <div className="nav-left">
+              <Link to="/home">
               <div className="navbar-logo">
                 <img src="logo192.png" alt="Logo" />
                 <span className="logo">Logo</span>
               </div>
+              </Link>
             </div>
 
             <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">

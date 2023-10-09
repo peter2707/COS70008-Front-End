@@ -89,7 +89,7 @@ export default function Login() {
       <div className="login-container max-h-min flex flex-row bg-white text-center shadow-lg rounded-2xl mx-8">
         <div className="left p-4 md:p-8 md:w-3/4 mx-auto">
           <div className="absolute bg-gray-100 p-2 rounded-md cursor-pointer hover:bg-primaryLight">
-            <Link to="/">
+            <Link to="/home">
               <img
                 title="Back to home"
                 className="w-6 h-6"
