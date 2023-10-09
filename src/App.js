@@ -1,12 +1,12 @@
-import React from 'react'
-import Home from './components/Home/Home'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <div className="section-container">
-        <Home />
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
