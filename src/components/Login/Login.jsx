@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
+const loginUrl = "http://localhost:3000/login";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -22,10 +24,6 @@ export default function Login() {
     return emailRegex.test(email);
   };
 
-  const validatePassword = (password) => {
-    // TODO: Check if password is match from backend
-  };
-
   const validateUser = () => {
     let isValid = true;
     const newErrors = {
@@ -44,9 +42,6 @@ export default function Login() {
     if (password.length === 0) {
       newErrors.password = "Please enter your password";
       isValid = false;
-    } else if (!validatePassword(password)) {
-      // TODO: Add password validation logic
-      isValid = false;
     }
 
     setErrors(newErrors);
@@ -62,25 +57,27 @@ export default function Login() {
     }
 
     try {
-      await axios.post("", {
-        email,
-        password,
-      });
+      await axios.post(
+        loginUrl,
+        {
+          email,
+          password
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log("Login successful");
       setErrorMessage("");
       navigate("/user-dashboard");
     } catch (error) {
       console.error("An error occurred while logging in:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage("An error occurred while signing up.");
-      }
+      setErrorMessage(error.response.data);
+      console.log("email: ", email);
+      console.log("password: ", password);
     }
   };
 
@@ -152,7 +149,7 @@ export default function Login() {
             </div>
 
             <div className="lower-content text-center mt-4 p-2">
-              <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-2">
+              <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-2" type="submit">
                 Log In
               </button>
 
