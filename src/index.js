@@ -23,8 +23,8 @@ root.render(
                 <Route path="support" element={<Support />} />
                 <Route path="login" element={<LogIn />} />
                 <Route path="register" element={<Register />} />
-                <Route path="userdashboard" element={<UserDashboard />} />
-                <Route path="admindashboard" element={<AdminDashboard />} />
+                <Route path="user-dashboard" element={<UserDashboard />} />
+                <Route path="admin-dashboard" element={<AdminDashboard />} />
             </Route>
         </Routes>
     </HashRouter>

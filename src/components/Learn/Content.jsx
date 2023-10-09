@@ -5,7 +5,7 @@ import { TbMenuDeep } from "react-icons/tb";
 import { HiOutlineX } from "react-icons/hi";
 import InformationBanner from "../InformationBanner";
 
-const token = "auth-token";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVycnkiLCJlbWFpbCI6ImVnMmdAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5NjgyMDQyNSwiZXhwIjoxNjk2ODI3NjI1fQ.TLIkyAIeLZxAoRGp6zItbEt-OleK14Eb6vh5R962HKA";
 const topicsUrl = "http://localhost:3000/content/topics";
 const contentUrlBase = "http://localhost:3000/content/page/";
 
