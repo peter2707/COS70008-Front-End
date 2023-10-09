@@ -3,14 +3,13 @@ import axios from "axios";
 import parse from "html-react-parser";
 import { TbMenuDeep } from "react-icons/tb";
 import { HiOutlineX } from "react-icons/hi";
-import InformationBanner from "../InformationBanner";
+import TopicOverview from "./TopicOverview";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVycnkiLCJlbWFpbCI6ImVnMmdAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5Njg0MDY1NiwiZXhwIjoxNjk2ODQ3ODU2fQ.m-SP2TMnc3WlU8Qf7yxZExK2vKYTbtYqaZrjeYjGoCA";
 const topicsUrl = "http://localhost:3000/content/topics";
 const contentUrlBase = "http://localhost:3000/content/page/";
 
 export default function Content() {
-  // State variables to store topics, selected topic, content, loading status, and sidebar activation
+  const [token, setToken] = useState("");
   const [topics, setTopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [content, setContent] = useState(null);
@@ -21,14 +20,24 @@ export default function Content() {
   async function getAllTopics() {
     try {
       setIsLoading(true);
-      const response = await axios.get(topicsUrl, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const results = response.data;
-      setTopics(results);
+      // Get token from local storage
+      const tokenFromStorage = localStorage.getItem("token");
+      if (tokenFromStorage) {
+        setToken(tokenFromStorage);
+        console.log("Token found:", tokenFromStorage);
+
+        const response = await axios.get(topicsUrl, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenFromStorage}`,
+          },
+        });
+
+        const results = response.data;
+        setTopics(results);
+      } else {
+        console.log("Token not found.");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -66,10 +75,16 @@ export default function Content() {
     setActivateSidebar(!activateSidebar);
   }
 
-  // Effect to fetch topics and content when selectedTopic changes
+  // Effect to fetch topics when the component mounts
   useEffect(() => {
     getAllTopics();
-    getTopicContent(selectedTopic);
+  }, []);
+
+  // Effect to fetch content when selectedTopic changes
+  useEffect(() => {
+    if (selectedTopic !== null) {
+      getTopicContent(selectedTopic);
+    }
   }, [selectedTopic]);
 
   return (
@@ -168,36 +183,3 @@ export default function Content() {
     </div>
   );
 }
-
-const TopicOverview = ({ topics, handleTopicSelection }) => {
-  return (
-    <div>
-      <InformationBanner
-        textBold="Acknowledgement: "
-        text="We want to ensure that you have access to the most accurate and reliable information available. The content on this page has been sourced from reputable organisations dedicated to HIV/AIDS education and awareness. "
-        linkName="Learn more"
-        href="/"
-      />
-      <div className="title-wrapper my-8 mx-6">
-        <h2>Overview</h2>
-        <p className="mt-2 text-xl">
-          Explore the topics below to gain access to the knowledge you need to
-          make informed decisions and take control of your health.
-        </p>
-      </div>
-      {topics.map((topic) => (
-        <div
-          className="hover:bg-primaryLight text-black bg-white cursor-pointer m-6 p-4"
-          key={topic._id}
-          onClick={() => handleTopicSelection(topic.content_id)}
-        >
-          <h5 className="text-primary mb-4 w-fit">{topic.name}</h5>
-          <p>
-            Dive into the very core of HIV/AIDS, various symptoms, stages of HIV
-            infection and find strategies for managing them effectively.
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-};
