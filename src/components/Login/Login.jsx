@@ -57,27 +57,21 @@ export default function Login() {
     }
 
     try {
-      await axios.post(
-        loginUrl,
-        {
-          email,
-          password
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(loginUrl, { email, password });
+      const { data } = response;
 
+      const { token, name, role } = data[0];
+      localStorage.setItem("token", token); // Store the token in local storage
+      localStorage.setItem("name", name); // Store user info in case needed
+      localStorage.setItem("role", role);
       console.log("Login successful");
       setErrorMessage("");
       navigate("/user-dashboard");
+      return true; // Login successful
     } catch (error) {
       console.error("An error occurred while logging in:", error);
       setErrorMessage(error.response.data);
-      console.log("email: ", email);
-      console.log("password: ", password);
+      return false
     }
   };
 
@@ -149,7 +143,10 @@ export default function Login() {
             </div>
 
             <div className="lower-content text-center mt-4 p-2">
-              <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-2" type="submit">
+              <button
+                className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-md py-2"
+                type="submit"
+              >
                 Log In
               </button>
 
