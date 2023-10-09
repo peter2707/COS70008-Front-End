@@ -37,7 +37,8 @@ export default function FindNearby() {
     setMap(null);
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     const searchQuery = "clinical centres at";
     const searchString = searchQuery + " " + userInput;
 
@@ -151,7 +152,6 @@ export default function FindNearby() {
               className="w-full px-4 py-2 mr-4"
               type="number"
               placeholder="Enter your location postcode"
-              readonly
             />
             <button
               className="bg-primaryLight text-lg font-medium px-4 py-2 rounded-xl hover:text-white hover:bg-primary transition-colors duration-75"

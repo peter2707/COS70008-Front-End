@@ -2,18 +2,27 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
+const registerUrl = "http://localhost:3000/register";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Register() {
+  const UserRole = {
+    USER: "user",
+    ADMIN: "admin",
+  };
+
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const [errors, setErrors] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -32,10 +41,19 @@ export default function Register() {
   const validateUser = () => {
     let isValid = true;
     const newErrors = {
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
     };
+
+    if (username.length === 0) {
+      newErrors.username = "Please enter your name";
+      isValid = false;
+    } else if (username.length > 20) {
+      newErrors.username = "Only 20 characters are allowed";
+      isValid = false;
+    }
 
     if (email.length === 0) {
       newErrors.email = "Please enter your email";
@@ -75,31 +93,33 @@ export default function Register() {
     }
 
     try {
-      await axios.post("http://localhost:3000/auth/signup", {
-        email,
-        password,
-      });
+      await axios.post(
+        registerUrl,
+        {
+          username,
+          email,
+          password,
+          role: UserRole.USER,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log("Signup successful");
       setErrorMessage("");
       navigate("/login");
     } catch (error) {
       console.error("An error occurred while signing up:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage("An error occurred while signing up.");
-      }
+      setErrorMessage(error.response.data);
     }
   };
 
   return (
     <section className="register flex justify-center items-center h-screen bg-white max-w-lg mx-auto">
-      <div className="register-container bg-white text-center border-2 rounded-2xl p-8">
+      <div className="register-container bg-white text-center border-2 rounded-2xl p-8 mx-4">
         <div className="absolute bg-gray-100 p-2 rounded-md cursor-pointer hover:bg-primaryLight">
           <Link to="/login">
             <img
@@ -120,6 +140,23 @@ export default function Register() {
 
         <form className="register-form text-left" onSubmit={handleSignup}>
           <div className="inputs-container">
+            <div className="username-input mb-2 p-2">
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={username}
+                className={classNames(
+                  "w-full bg-gray-100 text-sm rounded-md placeholder-gray-500 p-4",
+                  errors.username ? "border border-red-500" : ""
+                )}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {errors.username && (
+                <p className="text-red-500 text-xs my-1">{errors.username}</p>
+              )}
+            </div>
+
             <div className="email-input mb-2 p-2">
               <input
                 type="text"
@@ -162,11 +199,11 @@ export default function Register() {
                 value={confirmPassword}
                 className={classNames(
                   "w-full bg-gray-100 text-sm rounded-md placeholder-gray-500 p-4",
-                  errors.password ? "border border-red-500" : ""
+                  errors.confirmPassword ? "border border-red-500" : ""
                 )}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              {errors.password && (
+              {errors.confirmPassword && (
                 <p className="text-red-500 text-xs my-1">
                   {errors.confirmPassword}
                 </p>
@@ -174,12 +211,15 @@ export default function Register() {
             </div>
 
             {errorMessage && (
-              <p className="text-center text-red-500 my-2">{errorMessage}</p>
+              <p className="text-center text-red-500">{errorMessage}</p>
             )}
           </div>
 
-          <div className="lower-content text-center mt-14 p-2">
-            <button className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-full py-3 px-4">
+          <div className="lower-content text-center mt-8 p-2">
+            <button
+              className="w-full bg-primary hover:bg-blue-600 text-white font-medium text-center rounded-full py-3 px-4"
+              type="submit"
+            >
               Sign Up
             </button>
 
