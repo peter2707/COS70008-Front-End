@@ -1,7 +1,7 @@
 import InformationBanner from "../InformationBanner";
 const TopicOverview = ({ topics, handleTopicSelection }) => {
     return (
-      <div>
+      <div className="mt-14 lg:mt-0">
         <InformationBanner
           textBold="Acknowledgement: "
           text="We want to ensure that you have access to the most accurate and reliable information available. The content on this page has been sourced from reputable organisations dedicated to HIV/AIDS education and awareness. "

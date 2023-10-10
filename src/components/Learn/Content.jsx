@@ -15,6 +15,7 @@ export default function Content() {
   const [content, setContent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [activateSidebar, setActivateSidebar] = useState(false);
+  const [showOverview, setShowOverview] = useState(true); // Default to show overview
 
   // Function to fetch all topics
   async function getAllTopics() {
@@ -24,7 +25,6 @@ export default function Content() {
       const tokenFromStorage = localStorage.getItem("token");
       if (tokenFromStorage) {
         setToken(tokenFromStorage);
-        console.log("Token found:", tokenFromStorage);
 
         const response = await axios.get(topicsUrl, {
           headers: {
@@ -57,6 +57,7 @@ export default function Content() {
       });
       const results = response.data;
       setContent(results);
+      setShowOverview(false); // Hide the Overview when a topic is selected
     } catch (error) {
       console.error(error);
     } finally {
@@ -69,6 +70,7 @@ export default function Content() {
     setSelectedTopic(contentId);
     // Close the sidebar after a subtopic is selected
     setActivateSidebar(false);
+    setShowOverview(false); // Hide the Overview when a topic is selected
   }
 
   function toggleSidebar() {
@@ -87,6 +89,13 @@ export default function Content() {
     }
   }, [selectedTopic]);
 
+  // Function to handle showing the Overview
+  function handleOverviewClick() {
+    setSelectedTopic(null); // Reset selected topic
+    setShowOverview(true); // Show the Overview
+    setContent(null); // Clear content
+  }
+
   return (
     <div className="relative top-24 z-10 learn-container flex flex-col lg:flex-row">
       {/* Left panel desktop - topics navigation */}
@@ -95,20 +104,41 @@ export default function Content() {
           <p>Loading...</p>
         ) : (
           <div className="fixed">
+            <h6
+              className={`font-semibold text-lg lg:text-xl cursor-pointer p-0 mb-4 ${
+                showOverview
+                  ? "text-primary"
+                  : "hover:text-primary transition-colors duration-75"
+              }`}
+              onClick={handleOverviewClick}
+            >
+              Overview
+            </h6>
+            {/* Toggle Overview */}
             {topics.map((topic) => (
               <div key={topic._id}>
-                <p>{topic.name}</p>
+                <h6 className="font-semibold text-lg lg:text-xl">
+                  {topic.name}
+                </h6>
 
                 <div className="sub-topics-container ml-4 mt-2">
-                  {topic.sub_topics.map((sub_topic) => (
-                    <button
-                      className="text-primary"
-                      key={sub_topic._id}
-                      onClick={() => handleTopicSelection(sub_topic.content_id)}
-                    >
-                      {sub_topic.name}
-                    </button>
-                  ))}
+                  <ul>
+                    {topic.sub_topics.map((sub_topic) => (
+                      <li
+                        className={`cursor-pointer text-base lg:text-lg ${
+                          !showOverview
+                            ? "text-primary font-semibold"
+                            : "text-black hover:text-primary transition-colors duration-75"
+                        }`}
+                        key={sub_topic._id}
+                        onClick={() =>
+                          handleTopicSelection(sub_topic.content_id)
+                        }
+                      >
+                        {sub_topic.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -126,7 +156,7 @@ export default function Content() {
 
         {activateSidebar && (
           <div className="fixed flex flex-row w-full h-full">
-            <div className="bg-white w-2/5 min-w-fit px-4 pt-8">
+            <div className="bg-white w-3/5 min-w-max px-4 pt-8">
               <button
                 className="w-full flex justify-end"
                 onClick={toggleSidebar}
@@ -136,23 +166,43 @@ export default function Content() {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <div className="py-2 flex items-start justify-start">
-                  {topics.map((topic) => (
-                    <div key={topic._id}>
-                      <p className="text-left">{topic.name}</p>
-                      {topic.sub_topics.map((sub_topic) => (
-                        <div key={topic._id}>
-                          <button
-                            onClick={() =>
-                              handleTopicSelection(sub_topic.content_id)
-                            }
-                          >
-                            {sub_topic.name}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                <div>
+                  <h6
+                    className={`font-semibold text-lg lg:text-xl cursor-pointer p-0 mb-4 ${
+                      showOverview
+                        ? "text-primary"
+                        : "hover:text-primary transition-colors duration-75"
+                    }`}
+                    onClick={handleOverviewClick}
+                  >
+                    Overview
+                  </h6>
+                  <div className="flex items-start justify-start">
+                    {topics.map((topic) => (
+                      <div key={topic._id} className="mb-4">
+                        <h6 className="font-semibold text-lg lg:text-xl">
+                          {topic.name}
+                        </h6>
+                        <ul>
+                          {topic.sub_topics.map((sub_topic) => (
+                            <li
+                              className={`cursor-pointer text-base lg:text-lg ml-4 my-2 ${
+                                !showOverview
+                                  ? "text-primary font-semibold"
+                                  : "text-black hover:text-primary transition-colors duration-75"
+                              }`}
+                              key={sub_topic._id}
+                              onClick={() =>
+                                handleTopicSelection(sub_topic.content_id)
+                              }
+                            >
+                              {sub_topic.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -164,21 +214,24 @@ export default function Content() {
 
       {/* Display content on the right */}
       <div className="content-wrapper bg-gray-50 w-full">
-        {content == null ? (
-          <TopicOverview
-            topics={topics}
-            handleTopicSelection={handleTopicSelection}
-          />
-        ) : (
-          <div className="p-4 mt-16 lg:p-8 lg:mt-0">
-            {content.map((data) => (
-              <div key={data._id}>
+        <div>
+          {showOverview ? (
+            // Always show the TopicOverview
+            <TopicOverview
+              topics={topics}
+              handleTopicSelection={handleTopicSelection}
+            />
+          ) : content ? (
+            content.map((data) => (
+              <div className="mt-20 lg:mt-8 mx-4 lg:mx-8" key={data._id}>
                 <p className="text-primary font-semibold">{data.name}</p>
                 <div>{parse(data.content)}</div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <p>Select a topic or click "Overview" to see the overview.</p>
+          )}
+        </div>
       </div>
     </div>
   );
