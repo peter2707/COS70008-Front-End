@@ -3,32 +3,41 @@ import axios from "axios";
 import parse from "html-react-parser";
 import { TbMenuDeep } from "react-icons/tb";
 import { HiOutlineX } from "react-icons/hi";
-import InformationBanner from "../InformationBanner";
+import TopicOverview from "./TopicOverview";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVycnkiLCJlbWFpbCI6ImVnMmdAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5Njg0MDY1NiwiZXhwIjoxNjk2ODQ3ODU2fQ.m-SP2TMnc3WlU8Qf7yxZExK2vKYTbtYqaZrjeYjGoCA";
 const topicsUrl = "http://localhost:3000/content/topics";
 const contentUrlBase = "http://localhost:3000/content/page/";
 
 export default function Content() {
-  // State variables to store topics, selected topic, content, loading status, and sidebar activation
+  const [token, setToken] = useState("");
   const [topics, setTopics] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [content, setContent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [activateSidebar, setActivateSidebar] = useState(false);
+  const [showOverview, setShowOverview] = useState(true); // Default to show overview
 
   // Function to fetch all topics
   async function getAllTopics() {
     try {
       setIsLoading(true);
-      const response = await axios.get(topicsUrl, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const results = response.data;
-      setTopics(results);
+      // Get token from local storage
+      const tokenFromStorage = localStorage.getItem("token");
+      if (tokenFromStorage) {
+        setToken(tokenFromStorage);
+
+        const response = await axios.get(topicsUrl, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenFromStorage}`,
+          },
+        });
+
+        const results = response.data;
+        setTopics(results);
+      } else {
+        console.log("Token not found.");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -48,6 +57,7 @@ export default function Content() {
       });
       const results = response.data;
       setContent(results);
+      setShowOverview(false); // Hide the Overview when a topic is selected
     } catch (error) {
       console.error(error);
     } finally {
@@ -60,17 +70,31 @@ export default function Content() {
     setSelectedTopic(contentId);
     // Close the sidebar after a subtopic is selected
     setActivateSidebar(false);
+    setShowOverview(false); // Hide the Overview when a topic is selected
   }
 
   function toggleSidebar() {
     setActivateSidebar(!activateSidebar);
   }
 
-  // Effect to fetch topics and content when selectedTopic changes
+  // Effect to fetch topics when the component mounts
   useEffect(() => {
     getAllTopics();
-    getTopicContent(selectedTopic);
+  }, []);
+
+  // Effect to fetch content when selectedTopic changes
+  useEffect(() => {
+    if (selectedTopic !== null) {
+      getTopicContent(selectedTopic);
+    }
   }, [selectedTopic]);
+
+  // Function to handle showing the Overview
+  function handleOverviewClick() {
+    setSelectedTopic(null); // Reset selected topic
+    setShowOverview(true); // Show the Overview
+    setContent(null); // Clear content
+  }
 
   return (
     <div className="relative top-24 z-10 learn-container flex flex-col lg:flex-row">
@@ -80,20 +104,41 @@ export default function Content() {
           <p>Loading...</p>
         ) : (
           <div className="fixed">
+            <h6
+              className={`font-semibold text-lg lg:text-xl cursor-pointer p-0 mb-4 ${
+                showOverview
+                  ? "text-primary"
+                  : "hover:text-primary transition-colors duration-75"
+              }`}
+              onClick={handleOverviewClick}
+            >
+              Overview
+            </h6>
+            {/* Toggle Overview */}
             {topics.map((topic) => (
               <div key={topic._id}>
-                <p>{topic.name}</p>
+                <h6 className="font-semibold text-lg lg:text-xl">
+                  {topic.name}
+                </h6>
 
                 <div className="sub-topics-container ml-4 mt-2">
-                  {topic.sub_topics.map((sub_topic) => (
-                    <button
-                      className="text-primary"
-                      key={sub_topic._id}
-                      onClick={() => handleTopicSelection(sub_topic.content_id)}
-                    >
-                      {sub_topic.name}
-                    </button>
-                  ))}
+                  <ul>
+                    {topic.sub_topics.map((sub_topic) => (
+                      <li
+                        className={`cursor-pointer text-base lg:text-lg ${
+                          !showOverview
+                            ? "text-primary font-semibold"
+                            : "text-black hover:text-primary transition-colors duration-75"
+                        }`}
+                        key={sub_topic._id}
+                        onClick={() =>
+                          handleTopicSelection(sub_topic.content_id)
+                        }
+                      >
+                        {sub_topic.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -111,7 +156,7 @@ export default function Content() {
 
         {activateSidebar && (
           <div className="fixed flex flex-row w-full h-full">
-            <div className="bg-white w-2/5 min-w-fit px-4 pt-8">
+            <div className="bg-white w-3/5 min-w-max px-4 pt-8">
               <button
                 className="w-full flex justify-end"
                 onClick={toggleSidebar}
@@ -121,23 +166,43 @@ export default function Content() {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <div className="py-2 flex items-start justify-start">
-                  {topics.map((topic) => (
-                    <div key={topic._id}>
-                      <p className="text-left">{topic.name}</p>
-                      {topic.sub_topics.map((sub_topic) => (
-                        <div key={topic._id}>
-                          <button
-                            onClick={() =>
-                              handleTopicSelection(sub_topic.content_id)
-                            }
-                          >
-                            {sub_topic.name}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                <div>
+                  <h6
+                    className={`font-semibold text-lg lg:text-xl cursor-pointer p-0 mb-4 ${
+                      showOverview
+                        ? "text-primary"
+                        : "hover:text-primary transition-colors duration-75"
+                    }`}
+                    onClick={handleOverviewClick}
+                  >
+                    Overview
+                  </h6>
+                  <div className="flex items-start justify-start">
+                    {topics.map((topic) => (
+                      <div key={topic._id} className="mb-4">
+                        <h6 className="font-semibold text-lg lg:text-xl">
+                          {topic.name}
+                        </h6>
+                        <ul>
+                          {topic.sub_topics.map((sub_topic) => (
+                            <li
+                              className={`cursor-pointer text-base lg:text-lg ml-4 my-2 ${
+                                !showOverview
+                                  ? "text-primary font-semibold"
+                                  : "text-black hover:text-primary transition-colors duration-75"
+                              }`}
+                              key={sub_topic._id}
+                              onClick={() =>
+                                handleTopicSelection(sub_topic.content_id)
+                              }
+                            >
+                              {sub_topic.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -149,55 +214,25 @@ export default function Content() {
 
       {/* Display content on the right */}
       <div className="content-wrapper bg-gray-50 w-full">
-        {content == null ? (
-          <TopicOverview
-            topics={topics}
-            handleTopicSelection={handleTopicSelection}
-          />
-        ) : (
-          <div className="p-4 mt-16 lg:p-8 lg:mt-0">
-            {content.map((data) => (
-              <div key={data._id}>
+        <div>
+          {showOverview ? (
+            // Always show the TopicOverview
+            <TopicOverview
+              topics={topics}
+              handleTopicSelection={handleTopicSelection}
+            />
+          ) : content ? (
+            content.map((data) => (
+              <div className="mt-20 lg:mt-8 mx-4 lg:mx-8" key={data._id}>
                 <p className="text-primary font-semibold">{data.name}</p>
                 <div>{parse(data.content)}</div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <p>Select a topic or click "Overview" to see the overview.</p>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-const TopicOverview = ({ topics, handleTopicSelection }) => {
-  return (
-    <div>
-      <InformationBanner
-        textBold="Acknowledgement: "
-        text="We want to ensure that you have access to the most accurate and reliable information available. The content on this page has been sourced from reputable organisations dedicated to HIV/AIDS education and awareness. "
-        linkName="Learn more"
-        href="/"
-      />
-      <div className="title-wrapper my-8 mx-6">
-        <h2>Overview</h2>
-        <p className="mt-2 text-xl">
-          Explore the topics below to gain access to the knowledge you need to
-          make informed decisions and take control of your health.
-        </p>
-      </div>
-      {topics.map((topic) => (
-        <div
-          className="hover:bg-primaryLight text-black bg-white cursor-pointer m-6 p-4"
-          key={topic._id}
-          onClick={() => handleTopicSelection(topic.content_id)}
-        >
-          <h5 className="text-primary mb-4 w-fit">{topic.name}</h5>
-          <p>
-            Dive into the very core of HIV/AIDS, various symptoms, stages of HIV
-            infection and find strategies for managing them effectively.
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-};
