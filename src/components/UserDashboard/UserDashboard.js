@@ -6,18 +6,18 @@ const UserDashboard = () => {
         <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto">
             <div className="main-content">
                 <div className="header-content">
-                    <h1>Good Afternoon, [Name]</h1>
+                    <h1>Good Afternoon, Jason</h1>
                     <p>Wednesday, 30th August</p>
                 </div>
                 <div className="record-section">
                     <h1 className="text-primary">Next Periodic Test</h1>
-                    <h3>Secondary Subtitle</h3>
+                    <h3>12th December</h3>
                     <br />
                     <p>Last Recorded Test</p>
                     <p>12th June | Negative</p>
                     <br />
-                    <button className="primary-btn">Primary Button</button>
-                    <button className="outline-btn">Outline Button</button>
+                    <button className="primary-btn">Add Record</button>
+                    <button className="outline-btn">Download Record</button>
                 </div>
                 <div className="shortcut-section">
                     <h2>Title</h2>
@@ -40,7 +40,7 @@ const UserDashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="sidebar bg-primaryLight">
+            <div className="sidebar">
                 <div className="community-section">
                     <h6>Community Participation</h6>
                     <p>Answer HIV questionaires</p>

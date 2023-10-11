@@ -3,12 +3,11 @@
 }
 
 .adminSidebar {
+    min-height: 100vh;
     width: 250px;
     padding: 15px 20px;
-    height: 100vh;
-    overflow-y: auto;
     position: relative;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
 }
 
 .adminSidebar.collapsed {
@@ -22,13 +21,18 @@
     margin: 5px 0;
 }
 
-.adminSidebar button {
+.side-btn-group{
+    margin-top: 20px;
+}
+
+.adminSidebarBtn {
+    font-size: medium;
     display: block;
     width: 100%;
     text-align: left;
     padding: 10px 15px;
     margin: 5px 0;
-    color: #7f8c8d;
+    color: white;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -36,14 +40,37 @@
 }
 
 .adminSidebar button.active, 
-.adminSidebar button:hover {
-    color: #ecf0f1;
+.adminSidebarBtn:hover {
+    font-size: medium;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background-color: white;
+    color: #1363FF;
+    border-radius: 5px;
 }
 
-.signout-btn {
-    position: absolute;
+.logout-btn {
+    font-size: medium;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: white;
+    color: red;
+    border-radius: 5px;
     bottom: 20px;
-    width: 210px;
+    transition: color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: red;
+    color: white;
+}
+
+.logout{
+    margin-top: 50px;
 }
 
 .main-content {
@@ -55,9 +82,8 @@
 .toggle-btn {
     border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 10px;
     cursor: pointer;
-    background-color: #34495e;
     z-index: 2;
     display: none;
 }

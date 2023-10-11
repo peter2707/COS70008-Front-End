@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { FaPen } from "react-icons/fa";
 import "./User.css";
 
@@ -11,11 +12,48 @@ export function Users() {
     const [searchTerm, setSearchTerm] = useState("");
     const [showSearchFeedback, setShowSearchFeedback] = useState(false);
 
+    //create mockdata
+    const firstNames = ["John", "Jane", "Steve", "Mary", "Michael", "Emily", "David", "Linda", "Robert", "Susan"];
+    const lastNames = ["Smith", "Johnson", "Brown", "Jones", "Davis", "Miller", "Williams", "Wilson", "Anderson", "Taylor"];
+
+    function getRandom(array) {
+        return array[Math.floor(Math.random() * array.length)];
+    }
+
+    // Updated mock data function
+    function generateMockUsers(count, role) {
+        const users = [];
+        for (let i = 1; i <= count; i++) {
+            const name = `${getRandom(firstNames)} ${getRandom(lastNames)}`;
+            users.push({
+                id: i,
+                name: name,
+                email: `${name.replace(/ /g, '').toLowerCase()}@example.com`,
+                role: role
+            });
+        }
+        return users;
+    }
+
     useEffect(() => {
-        // In the future, you can fetch the users from the backend API here
-        const fetchedUsers = fetchMockData();
-        setUsers(fetchedUsers);
-        setDisplayedUsers(fetchedUsers);
+        // Commenting out the backend fetch
+        // const fetchUserData = async () => {
+        //     try {
+        //         const response = await axios.get('http://localhost:3000/users');
+        //         setUsers(response.data);
+        //         setDisplayedUsers(response.data);
+        //     } catch (error) {
+        //         console.error("Error fetching the users", error);
+        //     }
+        // }
+
+        // fetchUserData();
+
+        // Using mock data
+        const mockUsers = [...generateMockUsers(50, 'User'), ...generateMockUsers(5, 'Admin')];
+        setUsers(mockUsers);
+        setDisplayedUsers(mockUsers);
+        
     }, []);
 
     const handleSwitch = (role) => {
@@ -53,9 +91,9 @@ export function Users() {
     );
 
     return (
-        <div className="User-List">
+        <div className="user-container">
             <h1>All Users</h1>
-            <div className="group-switch">
+            <div className="user-group-switch">
                 <div
                     className={`switch-option ${
                         roleFilter === "User" ? "selected" : ""
@@ -193,17 +231,4 @@ function EditUserPopup({ user, onClose }) {
             </div>
         </div>
     );
-}
-
-function fetchMockData() {
-    const mockData = [];
-    for (let i = 1; i <= 20; i++) {
-        mockData.push({
-            id: i,
-            name: `User ${i}`,
-            email: `user${i}@example.com`,
-            role: i % 3 === 0 ? "Admin" : "User",
-        });
-    }
-    return mockData;
 }

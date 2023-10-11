@@ -32,6 +32,14 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleLogout = () => {
+        const confirmed = window.confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            //Log user out
+            console.log("Logged out!");
+        }
+    };
+
     return (
         <div className="admin-container">
             <div className={`bg-primary adminSidebar ${collapsed ? "collapsed" : ""}`}>
@@ -42,16 +50,20 @@ const AdminDashboard = () => {
                     {collapsed ? <FaAngleRight className="text-xl" /> : <FaAngleLeft className="text-xl" />}
                 </button>
                 <h5>Admin Name</h5>
-                {sections.map((section) => (
-                    <button
-                        key={section.id}
-                        className={selected === section.id ? "active" : ""}
-                        onClick={() => setSelected(section.id)}
-                    >
-                        {section.name}
-                    </button>
-                ))}
-                <button className="signout-btn">Sign Out</button>
+                <div className="side-btn-group">
+                    {sections.map((section) => (
+                        <button
+                            key={section.id}
+                            className={selected === section.id ? "active" : "adminSidebarBtn"}
+                            onClick={() => setSelected(section.id)}
+                        >
+                            {section.name}
+                        </button>
+                    ))}
+                </div>
+                <div className="logout">
+                    <button className="logout-btn" onClick={handleLogout}>Log Out</button>
+                </div>
             </div>
             <div className="main-content">
                 {renderContent()}
