@@ -1,60 +1,209 @@
-import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
+import React, { useState, useEffect } from "react";
+import { FaPen } from "react-icons/fa";
+import "./User.css";
 
 export function Users() {
     const [users, setUsers] = useState([]);
+    const [displayedUsers, setDisplayedUsers] = useState([]);
+    const [roleFilter, setRoleFilter] = useState("User");
+    const [showEditPopup, setShowEditPopup] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [showSearchFeedback, setShowSearchFeedback] = useState(false);
 
     useEffect(() => {
-        // Fetch from actual API
-        // axios.get('/api/users')
-        //     .then(response => {
-        //         setUsers(response.data);
-        //     })
-        //     .catch(error => {
-        //         console.error("Error fetching the users", error);
-        //     });
-        
-        // Using mock data instead
-        setUsers(fetchMockData());
+        // In the future, you can fetch the users from the backend API here
+        const fetchedUsers = fetchMockData();
+        setUsers(fetchedUsers);
+        setDisplayedUsers(fetchedUsers);
     }, []);
 
+    const handleSwitch = (role) => {
+        setRoleFilter(role);
+    };
+
+    const handleEdit = (user) => {
+        setSelectedUser(user);
+        setShowEditPopup(true);
+    };
+
+    const handleClosePopup = () => {
+        setSelectedUser(null);
+        setShowEditPopup(false);
+    };
+
+    const handleSearch = () => {
+        if (searchTerm) {
+            const filtered = users.filter(
+                (user) => 
+                    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    user.id.toString() === searchTerm
+            );
+            setDisplayedUsers(filtered);
+            setShowSearchFeedback(true);
+        } else {
+            setDisplayedUsers(users);
+            setShowSearchFeedback(false);
+        }
+    };
+
+    const filteredUsers = displayedUsers.filter(
+        (user) => user.role === roleFilter
+    );
+
     return (
-        <div>
+        <div className="User-List">
+            <h1>All Users</h1>
+            <div className="group-switch">
+                <div
+                    className={`switch-option ${
+                        roleFilter === "User" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSwitch("User")}
+                >
+                    User
+                </div>
+                <div
+                    className={`switch-option ${
+                        roleFilter === "Admin" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSwitch("Admin")}
+                >
+                    Admin
+                </div>
+            </div>
+            <hr />
+            <div className="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search by name, email or ID..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setShowSearchFeedback(false);
+                    }}
+                />
+                <button onClick={handleSearch}>Search</button>
+            </div>
+
+            {showSearchFeedback && searchTerm && (
+                <div className="search-feedback">
+                    Showing results for "{searchTerm}"
+                </div>
+            )}
             <table className="users-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
+                        <th>Username</th>
+                        <th>Email Address</th>
+                        <th>User ID</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
+                    {filteredUsers.map((user) => (
                         <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>{user.role}</td>
+                            <td>{user.id}</td>
                             <td>
-                                <button onClick={() => editUser(user.id)}>Edit</button>
+                                <button
+                                    className="edit-btn"
+                                    onClick={() => handleEdit(user)}
+                                >
+                                    <FaPen className="text-xl" />
+                                </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {showEditPopup && (
+                <EditUserPopup user={selectedUser} onClose={handleClosePopup} />
+            )}
         </div>
     );
 }
 
-function editUser(userId) {
-    // Logic to edit the user. Maybe navigate to an edit user page?
-    console.log(`Editing user with ID: ${userId}`);
+function EditUserPopup({ user, onClose }) {
+    const [editedUser, setEditedUser] = useState({ ...user });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Updated User:", editedUser);
+        onClose();
+    };
+
+    return (
+        <div className="popup">
+            <div className="popup-content">
+                <h3>Edit User</h3>
+                <form onSubmit={handleSubmit} className="edit-form">
+                    <div className="form-group">
+                        <label htmlFor="userName">Username:</label>
+                        <input
+                            type="text"
+                            id="userName"
+                            value={editedUser.name}
+                            onChange={(e) =>
+                                setEditedUser({
+                                    ...editedUser,
+                                    name: e.target.value,
+                                })
+                            }
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="userEmail">Email Address:</label>
+                        <input
+                            type="email"
+                            id="userEmail"
+                            value={editedUser.email}
+                            onChange={(e) =>
+                                setEditedUser({
+                                    ...editedUser,
+                                    email: e.target.value,
+                                })
+                            }
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="userId">User ID:</label>
+                        <input
+                            type="text"
+                            id="userId"
+                            value={editedUser.id}
+                            readOnly
+                        />
+                    </div>
+                    <div className="form-actions">
+                        <button
+                            type="button"
+                            className="cancel-btn"
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </button>
+                        <button type="submit" className="submit-btn">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 }
 
 function fetchMockData() {
-    return [
-        { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-        { id: 2, name: "Alice Smith", email: "alice@example.com", role: "User" },
-        { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Manager" }
-    ];
+    const mockData = [];
+    for (let i = 1; i <= 20; i++) {
+        mockData.push({
+            id: i,
+            name: `User ${i}`,
+            email: `user${i}@example.com`,
+            role: i % 3 === 0 ? "Admin" : "User",
+        });
+    }
+    return mockData;
 }
