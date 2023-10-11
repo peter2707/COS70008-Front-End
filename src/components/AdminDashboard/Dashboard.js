@@ -145,11 +145,13 @@ function HIVForms() {
             "Queensland",
             "South Australia",
             "Western Australia",
+            "Northern Territory",
+            "Tasmania"
         ],
         datasets: [
             {
                 label: "Cases",
-                data: [300, 250, 100, 50, 150],
+                data: [300, 250, 100, 50, 150, 40, 50],
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
