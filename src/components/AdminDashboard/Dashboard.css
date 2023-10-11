@@ -1,3 +1,16 @@
+.report-container{
+    margin-top: 20px;
+    display: flex;
+}
+
+.report-container button{
+    margin-left: 10px;
+}
+
+.report-container button:hover{
+    color: #1363FF;
+}
+
 .dashboard-group-switch {
     margin-top: 20px;
     margin-bottom: 20px;
