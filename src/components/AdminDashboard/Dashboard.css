@@ -1,45 +1,48 @@
+.dashboard-group-switch {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 500px;
+    display: flex;
+    overflow: hidden;
+}
+
+.dashboard-group-switch div{
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
 /* Dashboard.css */
-
-.dashboard-counts {
-    padding: 20px 0;
-    font-size: 0;
-}
-
-.user-count, .test-kit-count, .hiv-cases-count {
-    display: inline-block;
-    width: calc(33.33% - 20px);
-    vertical-align: top;
-    background-color: #f4f4f4; 
-    padding: 20px;
-    margin: 0 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-size: 16px;
-}
-
-.user-count {
-    background-color: #E57373;
-}
-
-.test-kit-count {
-    background-color: #81C784;
-}
-
-.hiv-cases-count {
-    background-color: #64B5F6;
-}
-
-/* Style for the charts */
-.dashboard-charts, .web-traffic-stats .device-distribution, .web-traffic-stats .visitor-trends {
-    height: 400px;
+.cards-container {
+    margin-top: 20px;
+    display: inline-flex;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-    .user-count, .test-kit-count, .hiv-cases-count {
-        display: block;
-        width: 100%;
-        margin: 10px 0; 
-    }
+.info-card {
+    margin-left: 50px;
+    width: 200px;
+    height: 80px;
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.chart-container {
+    width: 80%;
+    height: 400px;
+    margin-bottom: 70px;
+}
+
+.chart-header {
+    margin-bottom: 5px;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #333;
+}
+
+.section-container{
+    margin-left: 10px;
 }

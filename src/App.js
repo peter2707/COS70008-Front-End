@@ -35,16 +35,16 @@ const App = () => {
           <Route path="learn/:topicId" element={<Topic />} />
           <Route path="support" element={<Support />} />
           <Route
-            path="user-dashboard"
-            element={<PrivateRoute element={<UserDashboard />} />}
+            path="userdashboard"
+            element={<UserDashboard />}
           />
         </Route>
         <Route path="/" element={<Layout showNavbar={false} />}>
           <Route path="login" element={<LogIn />} />
           <Route path="register" element={<Register />} />
           <Route
-            path="admin-dashboard"
-            element={<PrivateRoute element={<AdminDashboard />} />}
+            path="admindashboard"
+            element={<AdminDashboard />}
           />
         </Route>
         {/* Add additional routes here */}

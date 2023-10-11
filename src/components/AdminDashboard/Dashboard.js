@@ -1,113 +1,200 @@
-import React, { useState, useEffect } from 'react';
-import "./Dashboard.css";
-import { Line, Pie } from 'react-chartjs-2';
+import React, { useState } from 'react';
+import { Line, Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
+import "./Dashboard.css";
 
 export function Dashboard() {
-    const [data, setData] = useState({
-        usersCount: 12345,
-        testKitPurchases: 5678,
-        newHIVCases: 90,
-        monthlyCounts: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October' /* ... */],
-            datasets: [
-                {
-                    label: 'Total Users',
-                    data: [12, 19, 30, 100, 80, 130, 100, 150, 200, 160 /* ... */],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
-                },
-                {
-                    label: 'Test Kit Purchases',
-                    data: [5, 10, 40, 60, 35, 70, 65, 80, 90, 75 /* ... */],
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1,
-                    fill: false
-                },
-                {
-                    label: 'New HIV Cases',
-                    data: [1, 5, 20, 10, 15, 7, 9, 5, 12, 14, 8 /* ... */],
-                    borderColor: 'rgba(20, 144, 234, 1)',
-                    borderWidth: 1,
-                    fill: false
-                }
-            ]
-        },
-        visitorsCount: 7890,
-        deviceDistribution: {
-            labels: ['Mobile', 'Desktop', 'Tablet'],
-            datasets: [{
-                data: [65, 30, 5],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-            }]
-        },
-        visitorTrends: {
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-            datasets: [{
-                label: 'Visitors',
-                data: [123, 234, 345, 456, 567],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-                fill: false
-            }]
+    const [selectedSection, setSelectedSection] = useState('HIV Forms');
+
+    const renderSection = () => {
+        switch (selectedSection) {
+            case 'HIV Forms':
+                return <HIVForms />;
+            case 'Accounts':
+                return <Accounts />;
+            case 'Web Traffic':
+                return <WebTraffic />;
+            default:
+                return null;
         }
-    });
-
-    const fetchDataFromBackend = async () => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve(data);
-            }, 1000);
-        });
-    };
-
-    useEffect(() => {
-        fetchDataFromBackend().then(responseData => {
-            setData(responseData);
-        });
-    }, []);
+    }
 
     return (
         <div>
-            {/* 1st Section: Counts */}
-            <div className="dashboard-cowunts">
-                <div className="user-count">
-                    <h4>Total Users</h4>
-                    <p>{data.usersCount}</p>
+            <h1>Dashboard</h1>
+            <div className="dashboard-group-switch">
+                <div 
+                    className={`switch-option ${selectedSection === 'HIV Forms' ? 'selected' : ''}`} 
+                    onClick={() => setSelectedSection('HIV Forms')}
+                >
+                    HIV Forms
                 </div>
-                <div className="test-kit-count">
-                    <h4>Test Kit Purchases</h4>
-                    <p>{data.testKitPurchases}</p>
+                <div 
+                    className={`switch-option ${selectedSection === 'Accounts' ? 'selected' : ''}`} 
+                    onClick={() => setSelectedSection('Accounts')}
+                >
+                    Accounts
                 </div>
-                <div className="hiv-cases-count">
-                    <h4>New HIV Cases</h4>
-                    <p>{data.newHIVCases}</p>
+                <div 
+                    className={`switch-option ${selectedSection === 'Web Traffic' ? 'selected' : ''}`} 
+                    onClick={() => setSelectedSection('Web Traffic')}
+                >
+                    Web Traffic
                 </div>
             </div>
+            <hr />
+            {renderSection()}
+        </div>
+    );
+}
 
-            {/* 2nd Section: Line Charts */}
-            <div className="dashboard-charts">
-                <Line data={data.monthlyCounts} />
+function InfoCard({ title, count }) {
+    return (
+        <div className="info-card">
+            <p><b>{title}</b></p>
+            <p>{count}</p>
+        </div>
+    );
+}
+
+function HIVForms() {
+    const testSubmissionCount = 1200;
+    const testKitPurchasedCount = 800;
+    const newCasesCount = 50;
+
+    const monthlyData = {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [
+            { label: 'Test Submission', data: [100, 110, 105, 115, 120], borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1, fill: false },
+            { label: 'Test Kit Purchased', data: [80, 90, 85, 88, 86], borderColor: 'rgba(153, 102, 255, 1)', borderWidth: 1, fill: false },
+            { label: 'New Cases', data: [50, 60, 55, 74, 68], borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1, fill: false }
+        ]
+    };
+
+    const positiveNegativeData = {
+        labels: ['Positive', 'Negative'],
+        datasets: [{ data: [15, 85], backgroundColor: ['#FF6384', '#36A2EB'], hoverBackgroundColor: ['#FF6384', '#36A2EB'] }]
+    };
+
+    const casesByStateData = {
+        labels: ['New South Wales', 'Victoria', 'Queensland', 'South Australia', 'Western Australia'],
+        datasets: [{ label: 'Cases', data: [300, 250, 100, 50, 150], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }]
+    };
+
+    return (
+        <div className="section-container">
+            <div className="cards-container">
+                <InfoCard title="Test Submission" count={testSubmissionCount} />
+                <InfoCard title="Test Kit Purchased" count={testKitPurchasedCount} />
+                <InfoCard title="New Cases" count={newCasesCount} />
             </div>
+            <div className="chart-container">
+                <div className="chart-header">Monthly Analysis</div>
+                <Line data={monthlyData} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Positive vs Negative Cases</div>
+                <Pie data={positiveNegativeData} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Cases by State</div>
+                <Bar data={casesByStateData} />
+            </div>
+        </div>
+    );
+}
 
-            {/* 3rd Section: Web Traffic Stats */}
-            <div className="web-traffic-stats">
-                <div className="visitor-count">
-                    <h4>Visitor Count</h4>
-                    <p>{data.visitorsCount}</p>
-                </div>
+function Accounts() {
+    const userCount = 25;
+    const userTypeCount = { user: 20, admin: 3 };
+    const newUserCount = 5;
 
-                <div className="device-distribution">
-                    <h4>Device Type Distribution</h4>
-                    <Pie data={data.deviceDistribution} />
-                </div>
+    const monthlyUsersData = {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [
+            { label: 'Total Users', data: [2, 4, 9, 10, 25], borderColor: 'rgba(255, 206, 86, 1)', borderWidth: 1, fill: false },
+            { label: 'New Users', data: [1, 3, 5, 4, 5], borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1, fill: false }
+        ]
+    };
+    
+    const userTypesPieData = {
+        labels: ['User', 'Admin'],
+        datasets: [{
+            data: [userTypeCount.user, userTypeCount.admin],
+            backgroundColor: ['#FF6384', '#36A2EB'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB']
+        }]
+    };
 
-                <div className="visitor-trends">
-                    <h4>Visitor Trends</h4>
-                    <Line data={data.visitorTrends} />
-                </div>
+    return (
+        <div className="section-container">
+            <div className="cards-container">
+                <InfoCard title="User Count" count={userCount} />
+                <InfoCard title="New Users" count={newUserCount} />
+                <InfoCard title="Admin" count={userTypeCount.admin} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Monthly Analysis</div>
+                <Line data={monthlyUsersData} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">User Types</div>
+                <Pie data={userTypesPieData} />
+            </div>
+        </div>
+    );
+}
+
+function WebTraffic() {
+    const pageVisits = 154;
+    const sessions = 89;
+    const avgTimeSpent = "3m 45s";
+
+    const dailyPageVisitsData = {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        datasets: [
+            { label: 'Page Visits', data: [50, 43, 67, 89, 155], borderColor: 'rgba(153, 102, 255, 1)', borderWidth: 1, fill: false }
+        ]
+    };
+    
+    const dailySessionsBarData = {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        datasets: [{
+            label: 'Sessions',
+            data: [15, 23, 50, 65, 89],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    };
+    
+    const deviceTypesPieData = {
+        labels: ['Mobile', 'Desktop', 'Tablet'],
+        datasets: [{
+            data: [12, 25, 5],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+    };
+
+    return (
+        <div className="section-container">
+            <div className="cards-container">
+                <InfoCard title="Page Visits" count={pageVisits} />
+                <InfoCard title="Sessions" count={sessions} />
+                <InfoCard title="Avg Time Spent" count={avgTimeSpent} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Weekly Visits</div>
+                <Line data={dailyPageVisitsData} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Weekly Sessions</div>
+                <Bar data={dailySessionsBarData} />
+            </div>
+            <div className="chart-container">
+                <div className="chart-header">Device Types</div>
+                <Pie data={deviceTypesPieData} />
             </div>
         </div>
     );
