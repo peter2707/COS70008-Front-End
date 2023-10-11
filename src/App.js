@@ -8,6 +8,7 @@ import LogIn from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import Topic from "./components/Learn/Topic";
 import { isAuthenticated } from "./utils/isAuthenticated";
 
 const PrivateRoute = ({ element }) => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="home" />} />
           <Route index path="home" element={<Home />} />
           <Route path="learn" element={<Learn />} />
+          <Route path="learn/:topicId" element={<Topic />} />
           <Route path="support" element={<Support />} />
           <Route
             path="user-dashboard"

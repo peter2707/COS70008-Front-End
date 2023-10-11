@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 //import { HiBookmark } from "react-icons/hi";
 import { TbMenuDeep } from "react-icons/tb";
 import { HiOutlineX } from "react-icons/hi";
@@ -16,7 +17,10 @@ export default function Topic({
   return (
     <>
       {/* Left panel desktop - topics navigation */}
-      <div className="topics-wrapper-desktop hidden lg:flex bg-white w-1/5 px-4 py-8">
+      <div
+        id="topic"
+        className="topics-wrapper-desktop hidden lg:flex bg-white w-1/5 px-4 py-8"
+      >
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -38,7 +42,7 @@ export default function Topic({
                   {topic.name}
                 </h6>
 
-                <div className="sub-topics-container ml-4 mt-2">
+                <nav className="sub-topics-container ml-4 mt-2">
                   <ul>
                     {topic.sub_topics.map((sub_topic) => (
                       <li
@@ -52,12 +56,14 @@ export default function Topic({
                           handleTopicSelection(sub_topic.content_id)
                         }
                       >
-                        {sub_topic.name}
+                        <Link to={`/learn/${sub_topic._id}`}>
+                          {sub_topic.name}
+                        </Link>
                         {/*<Bookmark />*/}
                       </li>
                     ))}
                   </ul>
-                </div>
+                </nav>
               </div>
             ))}
           </div>
@@ -97,7 +103,7 @@ export default function Topic({
                   </h6>
                   <div className="flex items-start justify-start">
                     {topics.map((topic) => (
-                      <div key={topic._id} className="mb-4">
+                      <nav key={topic._id} className="mb-4">
                         <h6 className="font-semibold text-lg lg:text-xl">
                           {topic.name}
                         </h6>
@@ -118,7 +124,7 @@ export default function Topic({
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </nav>
                     ))}
                   </div>
                 </div>

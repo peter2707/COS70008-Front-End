@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import parse from "html-react-parser";
 import TopicOverview from "./TopicOverview";
 import Topic from "./Topic";
-
-const topicsUrl = "http://localhost:3000/content/topics";
-const contentUrlBase = "http://localhost:3000/content/page/";
+import { getAllTopics, getTopicContent } from "./learnAPI";
 
 export default function Content() {
   const [token, setToken] = useState("");
@@ -17,22 +14,16 @@ export default function Content() {
   const [showOverview, setShowOverview] = useState(true); // Default to show overview
 
   // Function to fetch all topics
-  async function getAllTopics() {
+  async function fetchAllTopics() {
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       // Get token from local storage
       const tokenFromStorage = localStorage.getItem("token");
       if (tokenFromStorage) {
         setToken(tokenFromStorage);
 
-        const response = await axios.get(topicsUrl, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${tokenFromStorage}`,
-          },
-        });
-
-        const results = response.data;
+        const results = await getAllTopics(tokenFromStorage);
         setTopics(results);
       } else {
         console.log("Token not found.");
@@ -45,16 +36,11 @@ export default function Content() {
   }
 
   // Function to fetch content for a selected topic
-  async function getTopicContent(topicId) {
+  async function fetchTopicContent(topicId) {
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
-      const response = await axios.get(`${contentUrlBase}${topicId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const results = response.data;
+      const results = await getTopicContent(topicId, token);
       setContent(results);
       setShowOverview(false); // Hide the Overview when a topic is selected
     } catch (error) {
@@ -78,13 +64,13 @@ export default function Content() {
 
   // Effect to fetch topics when the component mounts
   useEffect(() => {
-    getAllTopics();
+    fetchAllTopics();
   }, []);
 
   // Effect to fetch content when selectedTopic changes
   useEffect(() => {
     if (selectedTopic !== null) {
-      getTopicContent(selectedTopic);
+      fetchTopicContent(selectedTopic);
     }
   }, [selectedTopic]);
 
