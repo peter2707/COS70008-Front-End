@@ -66,7 +66,7 @@ export default function Login() {
       localStorage.setItem("role", role);
       console.log("Login successful");
       setErrorMessage("");
-      navigate("/user-dashboard");
+      navigate("/userdashboard");
       return true; // Login successful
     } catch (error) {
       console.error("An error occurred while logging in:", error);

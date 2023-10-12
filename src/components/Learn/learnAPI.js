@@ -12,6 +12,7 @@ export async function getAllTopics(token) {
       },
     });
 
+    console.log(`here`, response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -27,7 +28,7 @@ export async function getTopicContent(topicId, token) {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log(`content: `, response.data);
     return response.data;
   } catch (error) {
     console.error(error);
