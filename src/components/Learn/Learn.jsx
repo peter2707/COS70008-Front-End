@@ -33,7 +33,7 @@ export default function Learn() {
   }
 
   return (
-    <section className="w-full h-auto relative top-0 lg:max-w-screen-2xl mx-auto">
+    <section className="w-full h-auto relative top-24 lg:max-w-screen-2xl mx-auto">
       <div className="learn-container">
         {/* Left panel desktop - topics navigation */}
         <div className="topics-wrapper-desktop hidden lg:flex bg-white w-full px-4">
@@ -55,11 +55,12 @@ export default function Learn() {
         </div>
 
         {/* Left panel mobile - topics navigation */}
-        <div className="topics-wrapper-mobile lg:hidden w-full">
-          <div className="bg-white w-full left-0 px-4">
-            <button onClick={toggleSidebar}>
-              <TbMenuDeep className="text-3xl border rounded-md" />
-            </button>
+        <div className="relative topics-wrapper-mobile lg:hidden w-full">
+          <div
+            className="fixed z-50 top-28 bg-blue-200/20 w-fit right-0 p-1 backdrop-blur-xl rounded-lg"
+            onClick={toggleSidebar}
+          >
+            <TbMenuDeep className="text-3xl text-primary" />
           </div>
           {activateSidebar && (
             <div className="absolute flex flex-row w-full h-full">
