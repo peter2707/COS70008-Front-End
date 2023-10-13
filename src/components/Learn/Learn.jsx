@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Learn.css";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { getAllTopics } from "./learnAPI";
 import Topic from "./Topic";
 import { TbMenuDeep } from "react-icons/tb";
@@ -33,37 +33,44 @@ export default function Learn() {
   }
 
   return (
-    <section className="w-full h-auto relative top-0 lg:max-w-screen-2xl mx-auto">
+    <section className="w-full h-auto relative top-24 lg:max-w-screen-2xl mx-auto">
       <div className="learn-container">
         {/* Left panel desktop - topics navigation */}
-        <div className="topics-wrapper-desktop hidden lg:flex bg-white w-full px-4">
+        <div className="topics-wrapper-desktop hidden lg:flex bg-white w-full">
           {isLoading ? (
             <p>Loading topics</p>
           ) : (
-            topics.map((topic) => (
-              <Topic
-                key={topic._id}
-                name={topic.name}
-                subTopics={topic.sub_topics}
-              />
-            ))
+            <div className="fixed bg-white w-fit h-full mb-6 pt-8 px-6">
+              <Link to="overview">
+                <p className="text-lg lg:text-xl font-semibold mb-4">
+                  Overview
+                </p>
+              </Link>
+              {topics.map((topic) => (
+                <Topic
+                  key={topic._id}
+                  name={topic.name}
+                  subTopics={topic.sub_topics}
+                />
+              ))}
+            </div>
           )}
-
-          <div id="subtopic-content-render" className="w-4/5">
+          <div id="subtopic-content-render" className="relative w-full ml-80">
             <Outlet />
           </div>
         </div>
 
         {/* Left panel mobile - topics navigation */}
-        <div className="topics-wrapper-mobile lg:hidden w-full">
-          <div className="bg-white w-full left-0 px-4">
-            <button onClick={toggleSidebar}>
-              <TbMenuDeep className="text-3xl border rounded-md" />
-            </button>
+        <div className="relative topics-wrapper-mobile lg:hidden w-full">
+          <div
+            className="fixed z-50 top-28 bg-blue-200/20 w-fit left-1 p-1 backdrop-blur-xl rounded-lg"
+            onClick={toggleSidebar}
+          >
+            <TbMenuDeep className="text-3xl text-primary" />
           </div>
           {activateSidebar && (
-            <div className="absolute flex flex-row w-full h-full">
-              <div className="bg-white w-3/5 min-w-max px-4">
+            <div className="absolute top-16 flex flex-row w-full h-full">
+              <div className="bg-white w-3/5 min-w-max px-4 pt-10">
                 {isLoading ? (
                   <p>Loading...</p>
                 ) : (

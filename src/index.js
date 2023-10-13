@@ -11,6 +11,7 @@ import ErrorPage from "./components/ErrorPage";
 import Layout from "./Layout";
 import Home from "./components/Home/Home";
 import Learn, { loader as topicLoader } from "./components/Learn/Learn";
+import TopicOverview from "./components/Learn/TopicOverview";
 import Support from "./components/Support/Support";
 import LogIn from "./components/Login/Login";
 import Register from "./components/Register/Register";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             element: <TopicContent />,
             loader: contentLoader,
           },
+          {
+            path:"overview",
+            element: <TopicOverview />,
+          }
         ],
       },
       {
