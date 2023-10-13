@@ -12,48 +12,26 @@ export function Users() {
     const [searchTerm, setSearchTerm] = useState("");
     const [showSearchFeedback, setShowSearchFeedback] = useState(false);
 
-    //create mockdata
-    const firstNames = ["John", "Jane", "Steve", "Mary", "Michael", "Emily", "David", "Linda", "Robert", "Susan"];
-    const lastNames = ["Smith", "Johnson", "Brown", "Jones", "Davis", "Miller", "Williams", "Wilson", "Anderson", "Taylor"];
-
-    function getRandom(array) {
-        return array[Math.floor(Math.random() * array.length)];
-    }
-
-    // Updated mock data function
-    function generateMockUsers(count, role) {
-        const users = [];
-        for (let i = 1; i <= count; i++) {
-            const name = `${getRandom(firstNames)} ${getRandom(lastNames)}`;
-            users.push({
-                id: i,
-                name: name,
-                email: `${name.replace(/ /g, '').toLowerCase()}@example.com`,
-                role: role
-            });
-        }
-        return users;
-    }
-
     useEffect(() => {
-        // Commenting out the backend fetch
-        // const fetchUserData = async () => {
-        //     try {
-        //         const response = await axios.get('http://localhost:3000/users');
-        //         setUsers(response.data);
-        //         setDisplayedUsers(response.data);
-        //     } catch (error) {
-        //         console.error("Error fetching the users", error);
-        //     }
-        // }
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem("token");
 
-        // fetchUserData();
+                const response = await axios.get('http://localhost:3000/admin/users', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-        // Using mock data
-        const mockUsers = [...generateMockUsers(50, 'User'), ...generateMockUsers(5, 'Admin')];
-        setUsers(mockUsers);
-        setDisplayedUsers(mockUsers);
-        
+                setUsers(response.data);
+                setDisplayedUsers(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error("Error fetching the users", error);
+            }
+        }
+
+        fetchUserData();
     }, []);
 
     const handleSwitch = (role) => {
@@ -87,7 +65,7 @@ export function Users() {
     };
 
     const filteredUsers = displayedUsers.filter(
-        (user) => user.role === roleFilter
+        (user) => user.role === roleFilter.toLowerCase()
     );
 
     return (
