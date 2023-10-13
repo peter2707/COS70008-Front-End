@@ -9,16 +9,16 @@ export default function Topic({ name, subTopics }) {
   };
 
   return (
-    <div className="w-full lg:w-1/5 block mb-6 pt-8">
-      <p className="text-lg lg:text-xl font-semibold mb-2">{name}</p>
+    <div className="block w-64 mb-4">
+      <p className="w-fit text-lg lg:text-xl font-semibold mb-2">{name}</p>
 
       {subTopics && subTopics !== null ? (
-        <nav role="navigation" className="ml-4">
+        <nav role="navigation" className="ml-4 w-fit">
           <ul>
             {subTopics.map((subTopic) => (
               <li
                 key={subTopic._id}
-                className={`text-base hover:text-primary lg:text-lg mb-3 ${
+                className={`text-base hover:text-primary lg:text-lg mb-2 ${
                   selectedItem === subTopic._id ? "text-primary font-semibold" : "text-black"
                 }`}
                 onClick={() => handleClick(subTopic._id)}
