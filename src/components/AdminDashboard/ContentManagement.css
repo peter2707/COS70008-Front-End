@@ -1,0 +1,49 @@
+/* ContentManagement.css */
+
+h5{
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+select {
+    margin-left: 20px;
+    width: 20%;
+    padding: 10px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Input styles */
+input {
+    border: #ccc solid 1px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
+/* React Quill styles */
+
+.react-quill-faq .ql-toolbar,
+.react-quill-article .ql-toolbar {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: none;
+}
+
+.react-quill-faq .ql-container,
+.react-quill-article .ql-container {
+    min-height: 300px;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+

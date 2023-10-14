@@ -121,7 +121,8 @@
 }
 
 .submit-btn {
-    background-color: #1363FF;
+    float: right;
+    background-color: #4BB543;
     color: white;
 }
 
@@ -131,7 +132,7 @@
 }
 
 .submit-btn:hover {
-    background-color: #0a4fc0;
+    background-color: #3d9a37;
 }
 
 .cancel-btn:hover {
@@ -147,6 +148,7 @@
 }
 
 .search-bar input {
+    margin-top: 10px;
     flex-grow: 1;
     padding: 8px;
     border: 1px solid #ccc;

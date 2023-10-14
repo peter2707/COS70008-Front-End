@@ -61,17 +61,17 @@ export default function Login() {
       const { data } = response;
 
       const { token, name, role } = data[0];
-      localStorage.setItem("token", token); // Store the token in local storage
-      localStorage.setItem("name", name); // Store user info in case needed
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", name);
       localStorage.setItem("role", role);
       console.log("Login successful");
       setErrorMessage("");
       navigate("/userdashboard");
-      return true; // Login successful
+      return true;
     } catch (error) {
       console.error("An error occurred while logging in:", error);
-      setErrorMessage(error.response.data);
-      return false
+      setErrorMessage(error.response?.data || "Error logging in");
+      return false;
     }
   };
 
