@@ -1,0 +1,4 @@
+.highlighted {
+  background-color: rgb(254, 254, 157); /* Change this to your desired highlight style */
+  transition: background-color 0.5s; /* Optional: add a smooth transition */
+}
