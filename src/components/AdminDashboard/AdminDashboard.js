@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';  // Updated import
 import "./AdminDashboard.css";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
@@ -12,6 +13,7 @@ import { Account } from './Account';
 const AdminDashboard = () => {
     const [selected, setSelected] = useState("dashboard");
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate();  // Using useNavigate
 
     const sections = [
         { id: "dashboard", name: "Dashboard" },
@@ -35,8 +37,8 @@ const AdminDashboard = () => {
     const handleLogout = () => {
         const confirmed = window.confirm("Are you sure you want to log out?");
         if (confirmed) {
-            //Log user out
-            console.log("Logged out!");
+            localStorage.removeItem("token");
+            navigate("/login", { state: { fromLogout: true } });
         }
     };
 
