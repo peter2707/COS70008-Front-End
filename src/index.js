@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: (
-          <Layout showNavbar={true}>
+          <Layout showNavbar={true} showFooter={true}>
             <Home />
           </Layout>
         ),
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <Layout showNavbar={true}>
+          <Layout showNavbar={true} showFooter={true}>
             <Navigate to="/home" />
           </Layout>
         ),
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: "learn",
         element: (
-          <Layout showNavbar={true}>
+          <Layout showNavbar={true} showFooter={false}>
             <Learn />
           </Layout>
         ),
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       {
         path: "support",
         element: (
-          <Layout showNavbar={true}>
+          <Layout showNavbar={true} showFooter={true}>
             <Support />
           </Layout>
         ),
