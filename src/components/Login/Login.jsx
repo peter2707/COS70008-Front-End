@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import "./Login.css";
 
 const loginUrl = "http://localhost:3000/login";
 
@@ -176,12 +177,12 @@ export default function Login() {
                                 Log In
                             </button>
 
-                            <p className="text-sm mt-6 my-2 text-gray-600">
+                            <p className="text-sm mt-5 mb-3 text-gray-600">
                                 Don't have an account?
                             </p>
 
                             <Link className="link" to="/register">
-                                Sign Up
+                                Register
                             </Link>
                         </div>
                     </form>
