@@ -3,6 +3,7 @@ import "./Learn.css";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { getAllTopics } from "./learnAPI";
 import Topic from "./Topic";
+import TopicOverview from "./TopicOverview";
 import { TbMenuDeep } from "react-icons/tb";
 
 const token = localStorage.getItem("token");
@@ -21,6 +22,7 @@ export default function Learn() {
   const { topics } = useLoaderData();
   const [isLoading, setIsLoading] = useState(false);
   const [activateSidebar, setActivateSidebar] = useState(false);
+  const [showOverview, setShowOverview] = useState(true);
 
   if (topics === null) {
     setIsLoading(true);
@@ -32,6 +34,14 @@ export default function Learn() {
     setActivateSidebar(!activateSidebar);
   }
 
+  function showTopicOverview() {
+    setShowOverview(true);
+  }
+
+  function hideTopicOverivew() {
+    setShowOverview(false);
+  }
+
   return (
     <section className="w-full h-auto relative top-24 lg:max-w-screen-2xl mx-auto">
       <div className="learn-container">
@@ -41,22 +51,23 @@ export default function Learn() {
             <p>Loading topics</p>
           ) : (
             <div className="fixed bg-white w-fit h-full mb-6 pt-8 px-6">
-              <Link to="overview">
+              <div className="cursor-pointer" onClick={showTopicOverview}>
                 <p className="text-lg lg:text-xl font-semibold mb-4">
                   Overview
                 </p>
-              </Link>
+              </div>
               {topics.map((topic) => (
                 <Topic
                   key={topic._id}
                   name={topic.name}
                   subTopics={topic.sub_topics}
+                  hideTopicOverview={hideTopicOverivew}
                 />
               ))}
             </div>
           )}
           <div id="subtopic-content-render" className="relative w-full ml-80">
-            <Outlet />
+            {showOverview ? <><TopicOverview topics={topics} hideTopicOverview={hideTopicOverivew}/></> : <Outlet />}
           </div>
         </div>
 
@@ -69,18 +80,26 @@ export default function Learn() {
             <TbMenuDeep className="text-3xl text-primary" />
           </div>
           {activateSidebar && (
-            <div className="absolute top-16 flex flex-row w-full h-full">
-              <div className="bg-white w-3/5 min-w-max px-4 pt-10">
+            <div className="fixed top-24 flex flex-row w-full h-full">
+              <div className="bg-white w-3/5 min-w-max px-4 pt-16">
                 {isLoading ? (
                   <p>Loading...</p>
                 ) : (
-                  topics.map((topic) => (
-                    <Topic
-                      key={topic._id}
-                      name={topic.name}
-                      subTopics={topic.sub_topics}
-                    />
-                  ))
+                  <>
+                    <div className="cursor-pointer" onClick={showTopicOverview}>
+                      <p className="text-lg lg:text-xl font-semibold mb-4 pt-8 lg:pt-0">
+                        Overview
+                      </p>
+                    </div>
+                    {topics.map((topic) => (
+                      <Topic
+                        key={topic._id}
+                        name={topic.name}
+                        subTopics={topic.sub_topics}
+                        hideTopicOverview={hideTopicOverivew}
+                      />
+                    ))}
+                  </>
                 )}
               </div>
 
@@ -88,7 +107,7 @@ export default function Learn() {
             </div>
           )}
           <div id="subtopic-content-render" className="w-full">
-            <Outlet />
+            {showOverview ? <TopicOverview topics={topics} hideTopicOverview={hideTopicOverivew} /> : <Outlet />}
           </div>
         </div>
       </div>

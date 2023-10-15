@@ -70,10 +70,6 @@ const router = createBrowserRouter([
             path: ":subTopicContentId",
             element: <TopicContent />,
             loader: contentLoader,
-          },
-          {
-            path:"overview",
-            element: <TopicOverview />,
           }
         ],
       },
