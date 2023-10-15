@@ -125,10 +125,21 @@ export default function TestkitPurchase() {
     },
   ];
   const openModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
-  const onNext = () =>
-    setCurrentIndex((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-  const onPrev = () => setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
+  const closeModal = () => {
+    setCurrentIndex(0);
+    setModalVisible(false);
+  };
+  const onNext = () => {
+    if (currentIndex < steps.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const onPrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
   return (
     <section className="testkit-purchase mx-6 sm:mx-8 mb-10 sm:mb-20">
       <div className="content-wrapper w-full flex flex-wrap justify-center items-start lg:justify-between lg:flex-nowrap lg:flex-cols-2 mx-auto">
@@ -169,36 +180,37 @@ export default function TestkitPurchase() {
             </li>
           </ul>
           <div className="buttons-container flex flex-row">
-            <button className="bg-primary text-white py-3 px-6 rounded-full mr-4 hover:bg-blue-700">
+            <button className="w-fit h-auto bg-primary text-white py-3 px-6 rounded-full mr-4 hover:bg-blue-700">
               <a
-                className="inline-flex items-center "
+                className="w-fit inline-flex items-center"
                 href="https://atomohivtest.com/home.php"
                 target="_blank"
                 rel="noreferrer"
               >
-                Buy Now{" "}
+                Buy Now
                 <img
-                  className="ml-3"
+                  className="w-auto ml-3"
                   src="/assets/icons/open-link.svg"
                   alt="Open purchase link in new tap"
                 />
               </a>
             </button>
-            <div className="p-4">
-              <button
-                className="border-2 border-primary py-3 px-6 rounded-full mr-4  hover:border-blue-800"
-                onClick={openModal}
-              >
-                Learn more
-              </button>
-              <TestkitInstructionModal
-                showModal={modalVisible}
-                closeModal={closeModal}
-                data={steps[currentIndex]}
-                onNext={onNext}
-                onPrev={onPrev}
-              />
-            </div>
+
+            <button
+              className="text-primary border-2 border-primary py-3 px-6 rounded-full mr-4  hover:border-blue-800"
+              onClick={openModal}
+            >
+              Instruction
+            </button>
+            <TestkitInstructionModal
+              showModal={modalVisible}
+              closeModal={closeModal}
+              data={steps[currentIndex]}
+              currentStep={currentIndex}
+              onNext={onNext}
+              onPrev={onPrev}
+              totalSteps={steps.length}
+            />
           </div>
         </div>
 

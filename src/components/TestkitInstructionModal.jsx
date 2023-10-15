@@ -1,5 +1,6 @@
 import React from "react";
 import { IoWarningOutline } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
 
 const TestkitInstructionModal = ({
   showModal,
@@ -7,20 +8,27 @@ const TestkitInstructionModal = ({
   data,
   onNext,
   onPrev,
+  currentStep,
+  totalSteps,
 }) => {
+  const isFirstStep = currentStep === 0;
+  const isLastStep = currentStep === totalSteps - 1;
+
   return (
     <div
       className={`fixed inset-0 z-50 overflow-y-auto bg-gray-500/20 backdrop-blur-sm ${
         showModal ? "block" : "hidden"
       }`}
     >
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white shadow-lg p-4 w-full min-w-fit mx-8 md:w-2/3 md:mx-auto text-center rounded-lg">
+      <div className="w-full mx-auto md:w-1/2 flex items-center justify-center min-h-screen">
+        <div className="bg-white shadow-lg p-4 w-full min-w-fit h-auto text-center rounded-lg mx-8">
           <button
             onClick={closeModal}
             className="w-full flex items-center justify-end text-gray-500 hover:text-gray-700"
           >
-            Close
+            <div className="flex justify-center items-center rounded-sm bg-gray-100 hover:bg-gray-200 w-8 h-8">
+              <MdClose />
+            </div>
           </button>
           <h2 className="text-2xl font-bold mb-2">{data.heading}</h2>
           {data.important !== undefined && (
@@ -35,19 +43,29 @@ const TestkitInstructionModal = ({
           <img
             src={data.image}
             alt={data.heading}
-            className="w-full object-contain h-64  mb-4"
+            className="w-full object-contain h-64 mb-4"
           />
           <p className="mb-4">{data.description}</p>
           <div className="flex justify-between">
             <button
               onClick={onPrev}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              className={`${
+                isFirstStep
+                  ? "bg-gray-200 text-gray-500"
+                  : "bg-primaryLight text-primary hover:bg-primary hover:text-white transition-colors duration-75"
+              } text-sm px-4 py-2 rounded-md`}
+              disabled={isFirstStep}
             >
-              Go Back
+              Previous
             </button>
             <button
               onClick={onNext}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              className={`${
+                isLastStep
+                  ? "bg-gray-200 text-gray-500"
+                  : "bg-primaryLight text-primary hover:bg-primary hover:text-white transition-colors duration-75"
+              } text-sm px-4 py-2 rounded-md`}
+              disabled={isLastStep}
             >
               Next
             </button>
