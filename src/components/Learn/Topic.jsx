@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Topic({ name, subTopics }) {
+export default function Topic({ name, subTopics, hideTopicOverview }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleClick = (itemId) => {
     setSelectedItem(itemId);
+    // Call the hideTopicOverview function when a subtopic is selected
+    hideTopicOverview();
   };
 
   return (
@@ -19,7 +21,9 @@ export default function Topic({ name, subTopics }) {
               <li
                 key={subTopic._id}
                 className={`text-base hover:text-primary lg:text-lg mb-2 ${
-                  selectedItem === subTopic._id ? "text-primary font-semibold" : "text-black"
+                  selectedItem === subTopic._id
+                    ? "text-primary font-semibold"
+                    : "text-black"
                 }`}
                 onClick={() => handleClick(subTopic._id)}
               >
