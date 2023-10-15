@@ -80,14 +80,14 @@ export default function Learn() {
             <TbMenuDeep className="text-3xl text-primary" />
           </div>
           {activateSidebar && (
-            <div className="absolute top-16 flex flex-row w-full h-full">
-              <div className="bg-white w-3/5 min-w-max px-4 pt-10">
+            <div className="fixed top-24 flex flex-row w-full h-full">
+              <div className="bg-white w-3/5 min-w-max px-4 pt-16">
                 {isLoading ? (
                   <p>Loading...</p>
                 ) : (
                   <>
                     <div className="cursor-pointer" onClick={showTopicOverview}>
-                      <p className="text-lg lg:text-xl font-semibold mb-4">
+                      <p className="text-lg lg:text-xl font-semibold mb-4 pt-8 lg:pt-0">
                         Overview
                       </p>
                     </div>
