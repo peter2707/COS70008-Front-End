@@ -3,7 +3,7 @@
     justify-content: space-between;
     padding: 20px;
 }
-.header-content{
+.header-content {
     margin-bottom: 20px;
 }
 
@@ -16,26 +16,38 @@
     background-color: #ddedff;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
-.primary-btn {
-    background-color: blue;
+.add-record-btn {
+    background-color: #1363ff;
     color: white;
     padding: 10px 15px;
+    border-radius: 20px;
     border: none;
-    border-radius: 5px;
     margin-right: 10px;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.outline-btn {
+.add-record-btn:hover {
+    background-color: #0a4fc0;
+}
+
+.download-record-btn {
     background-color: white;
-    color: blue;
-    padding: 10px 15px;
-    border: 2px solid blue;
-    border-radius: 5px;
+    color: #1363ff;
+    padding: 8px 13px;
+    border-radius: 20px;
+    border: 2px solid #1363ff;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.download-record-btn:hover {
+    background-color: #e0e0e0;
+    color: #0a4fc0;
+    border: 2px solid #0a4fc0;
 }
 
 .shortcut-section {
@@ -51,11 +63,18 @@
 }
 
 .expand-all-btn {
+    float: right;
     background-color: #eee;
     border: none;
+    margin-top: 20px;
+    border-radius: 20px;
     padding: 10px 15px;
-    margin-bottom: 20px;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.expand-all-btn:hover {
+    background-color: #e0e0e0;
 }
 
 .article-card {
@@ -72,34 +91,149 @@
     color: white;
     padding: 7px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
 .sidebar {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
     width: 30%;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
-.community-section{
+.community-section {
     padding: 20px;
-    background-color: #FFE7DD;
-    border-radius: 10px;
+    background-color: #ffe7dd;
+    border-radius: 20px;
 }
 
-.community-section h6{
-    color: #C56941;
+.community-section h6 {
+    margin-bottom: 20px;
+    color: #c56941;
 }
 
-.email-notification-section{
+.answer-community-qa-btn{
+    background-color: #c56941;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 7px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.answer-community-qa-btn:hover{
+    background-color: white;
+    color: #c56941;
+    padding: 6px 14px;
+    border: 1px solid #c56941;
+}
+
+.email-notification-section {
     margin-top: 20px;
     padding: 20px;
-    background-color: #E0F9E3;
-    border-radius: 10px;
+    background-color: #e0f9e3;
+    border-radius: 20px;
 }
 
-.email-notification-section h6{
-    color: #42A64D;
+.email-notification-section h6 {
+    margin-bottom: 20px;
+    color: #42a64d;
+}
+
+.set-email-btn{
+    float: right;
+}
+
+.set-email-btn:hover{
+    color: #42a64d;
+}
+
+.get-testkit-section {
+    background-color: #ddedff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.get-testkit-section h6 {
+    margin-bottom: 20px;
+    color: #1363ff;
+}
+
+.purchase-link {
+    display: flex;
+    text-decoration: underline;
+}
+
+.purchase-link svg { 
+    margin-left: 7px;
+    margin-top: 4px;
+}
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-btn {
+    float: right;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    border: red solid 1px;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    color: red;
+    background-color: white;
+}
+
+.form-question{
+    margin-top: 20px;
+}
+
+.form-question label{
+    margin-bottom: 10px;
+}
+
+.form-question input{
+    width: 100%;
+}
+
+.form-question select{
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.form-question a{
+    color: #1363ff;
+    text-decoration: underline;
+}
+
+#terms{
+    width: 20px;
+    margin-top: 7px;
+    margin-right: 10px;
+    float: left;
 }
