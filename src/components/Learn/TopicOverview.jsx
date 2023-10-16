@@ -21,18 +21,23 @@ const TopicOverview = ({ topics, hideTopicOverview }) => {
           make informed decisions and take control of your health.
         </p>
       </div>
-      <div className="flex flex-col sm:flex-row">
+      <div className="grid grid-1 md:grid-cols-2 gap-2 mx-6 md:mx-8">
         {topics.map((topic) => (
           <div
-            className="hover:bg-primaryLight text-black bg-white cursor-pointer m-6 p-4"
+            className="w-full hover:bg-primaryLight text-black bg-white cursor-pointer p-4"
             key={topic._id}
             onClick={handleClick}
           >
-            <Link to={`${topic.sub_topics[0].content_id}`}>
+            <Link
+              to={
+                topic.sub_topics.length > 0
+                  ? `${topic.sub_topics[0].content_id}`
+                  : "No sub topics available" // TODO: Display error if there are no topics available
+              }
+            >
               <h5 className="text-primary mb-4 w-fit">{topic.name}</h5>
-              <p>
-                Dive into the very core of HIV/AIDS, various symptoms, stages of
-                HIV infection and find strategies for managing them effectively.
+              <p className="w-4/5 h-32">
+                {topic.description}
               </p>
             </Link>
           </div>
