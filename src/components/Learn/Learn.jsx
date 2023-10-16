@@ -12,6 +12,7 @@ const token = localStorage.getItem("token");
 export async function loader() {
   try {
     const topics = await getAllTopics(token);
+    console.log("learn coponent: " + topics)
     return { topics };
   } catch (error) {
     console.error("Failed to fetch topics:", error);
@@ -55,6 +56,7 @@ export default function Learn() {
                   Overview
                 </p>
               </div>
+
               {topics.map((topic) => (
                 <Topic
                   key={topic._id}
