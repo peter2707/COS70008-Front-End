@@ -11,7 +11,6 @@ import ErrorPage from "./components/ErrorPage";
 import Layout from "./Layout";
 import Home from "./components/Home/Home";
 import Learn, { loader as topicLoader } from "./components/Learn/Learn";
-import TopicOverview from "./components/Learn/TopicOverview";
 import Support from "./components/Support/Support";
 import LogIn from "./components/Login/Login";
 import Register from "./components/Register/Register";
@@ -20,6 +19,7 @@ import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import TopicContent, {
   loader as contentLoader,
 } from "./components/Learn/TopicContent";
+import ContentError from "./components/Learn/ContentError";
 import { isAuthenticated } from "./utils/isAuthenticated";
 
 const PrivateRoute = ({ element }) => {
@@ -53,7 +53,11 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <Layout showNavbar={true} showFooter={true}>
-            <Navigate to="/home" />
+            {isAuthenticated() ? (
+              <Navigate to="/userdashboard" />
+            ) : (
+              <Navigate to="/home" />
+            )}
           </Layout>
         ),
       },
@@ -70,7 +74,11 @@ const router = createBrowserRouter([
             path: ":subTopicContentId",
             element: <TopicContent />,
             loader: contentLoader,
-          }
+          },
+          {
+            path: "content-authentication",
+            element: <ContentError />,
+          },
         ],
       },
       {
