@@ -5,13 +5,9 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { isAuthenticated } from "../../utils/isAuthenticated";
 
 const navigation = [
-  {
-    name: "Home",
-    route: "/home",
-    current: false,
-  },
   {
     name: "Learn",
     route: "/learn",
@@ -30,8 +26,15 @@ const navigation = [
 ];
 
 const NavigationBar = () => {
+  function reloadPage() {
+    window.location.reload();
+  }
   return (
-    <Disclosure as="nav" role="navigation" className="navbar w-full lg:max-w-screen-2xl mx-auto bg-white">
+    <Disclosure
+      as="nav"
+      role="navigation"
+      className="navbar w-full lg:max-w-screen-2xl mx-auto bg-white"
+    >
       {({ open }) => (
         <>
           <div className="navbar-container px-8 z-10">
@@ -48,27 +51,37 @@ const NavigationBar = () => {
             </div>
 
             <div className="nav-left">
-              <Link to="/home">
-              <div className="navbar-logo">
-                <img src="logo192.png" alt="Logo" />
-                <span className="logo">Logo</span>
-              </div>
+              <Link to={isAuthenticated() ? "/userdashboard" : "/home"}>
+                <div className="navbar-logo">
+                  <img src="logo192.png" alt="Logo" />
+                  <span className="logo">Logo</span>
+                </div>
               </Link>
             </div>
 
             <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <div className="hidden mx-4 sm:ml-6 sm:block">
                 <div className="flex items-center justify-end">
-                  {navigation.map((item) => (
-                    <ul className="navbar-items" key={item.name}>
-                      <li>
-                        <Link className="px-4 md:px-6 py-9" to={item.route}>
-                          {item.name}
-                        </Link>
-                      </li>
-                    </ul>
-                  ))}
-
+                  <ul className="navbar-items">
+                    <li>
+                      <Link
+                        className="px-4 md:px-6 py-9"
+                        to={isAuthenticated() ? "/userdashboard" : "/home"}
+                      >
+                        Home
+                      </Link>
+                    </li>
+                    {navigation.map((item) => (
+                      <li key={item.name}>
+                      <Link
+                        className="px-4 md:px-6 py-9"
+                        to={item.route}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                    ))}
+                  </ul>
                   <Link
                     className="flex justify-center items-center p-3 bg-primary hover:bg-primaryLight text-white hover:text-primary rounded-full ml-4"
                     to="/login"
@@ -84,13 +97,21 @@ const NavigationBar = () => {
           <Disclosure.Panel className="sm:hidden">
             <div className="nav-mobile mx-auto z-10">
               <div className="w-full text-center">
-                {navigation.map((item) => (
-                  <ul className="navbar-items mobile" key={item.name}>
-                    <li>
-                      <a href={item.route}>{item.name}</a>
+                <ul className="navbar-items mobile">
+                  <li>
+                    <Link
+                      className="px-4 md:px-6 py-9"
+                      to={isAuthenticated() ? "/userdashboard" : "/home"}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  {navigation.map((item) => (
+                    <li key={item.name}>
+                      <Link to={item.route}>{item.name}</Link>
                     </li>
-                  </ul>
-                ))}
+                  ))}
+                </ul>
               </div>
 
               <div className="w-1/5 mx-auto">

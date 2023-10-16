@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Learn.css";
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import { getAllTopics } from "./learnAPI";
 import Topic from "./Topic";
 import TopicOverview from "./TopicOverview";
 import { TbMenuDeep } from "react-icons/tb";
+import ContentError from "./ContentError";
 
 const token = localStorage.getItem("token");
 
@@ -26,8 +27,6 @@ export default function Learn() {
 
   if (topics === null) {
     setIsLoading(true);
-  } else if (topics.length === 0) {
-    return <p>No topics found</p>;
   }
 
   function toggleSidebar() {
@@ -67,7 +66,18 @@ export default function Learn() {
             </div>
           )}
           <div id="subtopic-content-render" className="relative w-full ml-80">
-            {showOverview ? <><TopicOverview topics={topics} hideTopicOverview={hideTopicOverivew}/></> : <Outlet />}
+            {topics.length === 0 ? (
+              <ContentError />
+            ) : showOverview ? (
+              <>
+                <TopicOverview
+                  topics={topics}
+                  hideTopicOverview={hideTopicOverivew}
+                />
+              </>
+            ) : (
+              <Outlet />
+            )}
           </div>
         </div>
 
@@ -107,7 +117,14 @@ export default function Learn() {
             </div>
           )}
           <div id="subtopic-content-render" className="w-full">
-            {showOverview ? <TopicOverview topics={topics} hideTopicOverview={hideTopicOverivew} /> : <Outlet />}
+            {showOverview ? (
+              <TopicOverview
+                topics={topics}
+                hideTopicOverview={hideTopicOverivew}
+              />
+            ) : (
+              <Outlet />
+            )}
           </div>
         </div>
       </div>
