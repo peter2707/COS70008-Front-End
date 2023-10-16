@@ -1,9 +1,9 @@
-import React from "react";
+import { Fragment } from "react";
 import "./NavigationBar.css";
 import { FaUser } from "react-icons/fa";
 import { HiOutlineMenu } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../../utils/isAuthenticated";
 
@@ -25,10 +25,19 @@ const navigation = [
   },
 ];
 
+const dropdownItems = [
+  isAuthenticated() ? { name: "Your profile", route: "/profile" } : null,
+  isAuthenticated() ? { name: "Settings", route: "/account-settings" } : null,
+  isAuthenticated()
+    ? { name: "Logout", route: "/logout" }
+    : { name: "Login", route: "/login" },
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const NavigationBar = () => {
-  function reloadPage() {
-    window.location.reload();
-  }
   return (
     <Disclosure
       as="nav"
@@ -73,21 +82,60 @@ const NavigationBar = () => {
                     </li>
                     {navigation.map((item) => (
                       <li key={item.name}>
-                      <Link
-                        className="px-4 md:px-6 py-9"
-                        to={item.route}
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
+                        <Link className="px-4 md:px-6 py-9" to={item.route}>
+                          {item.name}
+                        </Link>
+                      </li>
                     ))}
                   </ul>
-                  <Link
-                    className="flex justify-center items-center p-3 bg-primary hover:bg-primaryLight text-white hover:text-primary rounded-full ml-4"
-                    to="/login"
-                  >
-                    <FaUser className="text-xl" />
-                  </Link>
+
+                  {/* Profile dropdown */}
+                  <Menu as="div" className="relative ml-3">
+                    <Menu.Button>
+                      <div className="flex justify-center items-center p-3 bg-primary hover:bg-primaryLight text-white hover:text-primary rounded-full cursor-pointer transition-colors duration-75">
+                        <FaUser className="h-6 w-6" />
+                      </div>
+                    </Menu.Button>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-4 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {dropdownItems.map((item, index) => {
+                          if (item) {
+                            return (
+                              <Menu.Item
+                                as="button"
+                                id={index}
+                                role="button"
+                                className="w-full text-left"
+                                key={index}
+                              >
+                                {({ active }) => (
+                                  <Link
+                                    to={item.route}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-base"
+                                    )}
+                                  >
+                                    {item.name}
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            );
+                          } else {
+                            return null; // Return null for items that are null in the array
+                          }
+                        })}
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 </div>
               </div>
             </div>
