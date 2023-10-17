@@ -13,6 +13,7 @@ import Home from "./components/Home/Home";
 import Learn, { loader as topicLoader } from "./components/Learn/Learn";
 import Support from "./components/Support/Support";
 import LogIn from "./components/Login/Login";
+import About from "./components/About";
 import Register from "./components/Register/Register";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
@@ -91,7 +92,11 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        //element: <About />,
+        element: (
+          <Layout showNavbar={true} showFooter={true}>
+            <About />
+          </Layout>
+        ),
       },
       {
         path: "login",
