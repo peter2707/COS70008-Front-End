@@ -17,7 +17,7 @@ const UserDashboard = () => {
 
     useEffect(() => {
         axios
-            .get("/api/user-details")
+            .get("http://localhost:3000/users")
             .then((response) => {
                 setUserData(response.data);
             })
@@ -62,11 +62,19 @@ const UserDashboard = () => {
         handleCloseModal();
     };
 
+    const getGreeting = () => {
+        const currentHour = new Date().getHours();
+        
+        if (currentHour < 12) return "Good Morning";
+        if (currentHour < 18) return "Good Afternoon";
+        return "Good Evening";
+    };
+
     return (
         <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto mt-24">
             <div className="main-content">
                 <div className="header-content">
-                    <h1>Good Afternoon, {userData.name}</h1>
+                    <h1>{getGreeting()}, {userData.name}</h1>
                     <p>{userData.date}</p>
                 </div>
                 <div className="record-section">
