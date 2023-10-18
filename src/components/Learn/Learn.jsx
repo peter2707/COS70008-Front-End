@@ -7,11 +7,9 @@ import TopicOverview from "./TopicOverview";
 import { TbMenuDeep } from "react-icons/tb";
 import ContentError from "./ContentError";
 
-const token = localStorage.getItem("token");
-
 export async function loader() {
   try {
-    const topics = await getAllTopics(token);
+    const topics = await getAllTopics();
     console.log("learn coponent: " + topics)
     return { topics };
   } catch (error) {

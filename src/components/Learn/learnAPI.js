@@ -3,12 +3,11 @@ import axios from "axios";
 const topicsUrl = "http://localhost:3000/content/topics";
 const contentUrlBase = "http://localhost:3000/content/page/";
 
-export async function getAllTopics(token) {
+export async function getAllTopics() {
   try {
     const response = await axios.get(topicsUrl, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -20,12 +19,11 @@ export async function getAllTopics(token) {
   }
 }
 
-export async function getTopicContent(topicId, token) {
+export async function getTopicContent(topicId) {
   try {
     const response = await axios.get(`${contentUrlBase}${topicId}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
 

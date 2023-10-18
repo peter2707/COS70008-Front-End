@@ -12,7 +12,7 @@ const TopicOverview = ({ topics, hideTopicOverview }) => {
         textBold="Acknowledgement: "
         text="We want to ensure that you have access to the most accurate and reliable information available. The content on this page has been sourced from reputable organisations dedicated to HIV/AIDS education and awareness. "
         linkName="Learn more"
-        href="/"
+        href="/about"
       />
       <div className="title-wrapper my-8 mx-6">
         <h2>Overview</h2>
