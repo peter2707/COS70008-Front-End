@@ -13,7 +13,10 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
       className={`fixed inset-0 overflow-y-auto z-50 ${isOpen ? "" : "hidden"}`}
     >
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div
+          className="fixed inset-0 transition-opacity backdrop-blur-sm"
+          aria-hidden="true"
+        >
           <div className="absolute inset-0 bg-gray-500 opacity-75" />
         </div>
         <span
@@ -30,7 +33,7 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
         >
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start">
-              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <div className="w-full mt-3 sm:mt-0 sm:text-left">
                 <h3
                   className="text-lg leading-6 font-medium text-gray-900"
                   id="modal-headline"
@@ -43,7 +46,7 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     Name
                   </label>
@@ -60,14 +63,14 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="gender"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     Gender
                   </label>
                   <select
                     id="gender"
                     name="gender"
-                    className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    className="mt-1 ml-0 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                   >
@@ -81,14 +84,14 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="hivStatus"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     HIV Status or History
                   </label>
                   <select
                     id="hivStatus"
                     name="hivStatus"
-                    className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    className="mt-1 ml-0 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     value={hivStatus}
                     onChange={(e) => setHIVStatus(e.target.value)}
                   >
@@ -102,7 +105,7 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="sexualOrientation"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     Sexual Orientation
                   </label>
@@ -119,7 +122,7 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="nationality"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     Nationality
                   </label>
@@ -136,14 +139,14 @@ const DemographicQuestionnaire = ({ isOpen, onClose, handleSubmit }) => {
                 <div className="mt-2">
                   <label
                     htmlFor="livingArea"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-0"
                   >
                     Current Living Area in Australia
                   </label>
                   <select
                     id="livingArea"
                     name="livingArea"
-                    className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    className="mt-1 p-2 ml-0 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     value={livingArea}
                     onChange={(e) => setLivingArea(e.target.value)}
                   >

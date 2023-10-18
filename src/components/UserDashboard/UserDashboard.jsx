@@ -6,6 +6,8 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./UserDashboard.css";
 import DemographicQuestionnaire from "../DemographicQuestionnaire";
+import TestkitInstructionModal from "../TestkitInstructionModal";
+import steps from "../testkitSteps.js";
 
 const UserDashboard = () => {
   const [userData, setUserData] = useState({
@@ -28,7 +30,26 @@ const UserDashboard = () => {
   });
   const [showDemographicQuestionnaire, setShowDemographicQuestionnaire] =
     useState(false);
+  const [showTestkitInstructionModal, setShowTestkitInstructionModal] =
+    useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  const openModal = () => setShowTestkitInstructionModal(true);
+  const closeModal = () => {
+    setCurrentIndex(0);
+    setShowTestkitInstructionModal(false);
+  };
+  const onNext = () => {
+    if (currentIndex < steps.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const onPrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
   // Generate formatted date
   const date = () => {
     const today = new Date();
@@ -130,7 +151,7 @@ const UserDashboard = () => {
 
   return (
     <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto mt-24">
-      <div className="main-content relative top-20 md:top-0">
+      <div className="main-content relative top-36 md:top-0">
         <div className="header-content">
           <h1>
             {getGreeting()}, {userData.name}
@@ -314,14 +335,35 @@ const UserDashboard = () => {
           <h6>Email Notification</h6>
           <p>Every 3 months</p>
         </div>
-        <br />
-        <hr />
-        <br />
+        <hr className="my-8" />
         <div className="get-testkit-section">
           <h6>Get HIV self-testing kit</h6>
-          <a href="https://atomohivtest.com/home.php" className="purchase-link">
-            Purchase test kit <FaLink />
-          </a>
+          <div className="flex flex-row flex-wrap justify-between items-center">
+            <a
+              href="https://atomohivtest.com/home.php"
+              className="link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Purchase test kit <FaLink />
+            </a>
+            <button
+              className="bg-white text-sm text-primary border border-primary p-2 rounded-full"
+              onClick={openModal}
+            >
+              Instruction
+            </button>
+          </div>
+
+          <TestkitInstructionModal
+            showModal={showTestkitInstructionModal}
+            closeModal={closeModal}
+            data={steps[currentIndex]}
+            currentStep={currentIndex}
+            onNext={onNext}
+            onPrev={onPrev}
+            totalSteps={steps.length}
+          />
         </div>
       </div>
       {showDemographicQuestionnaire && (
@@ -334,7 +376,7 @@ const UserDashboard = () => {
 
       {/* Sidebar - Mobile */}
       <div className="sidebar-mobile bg-white w-full fixed top-24 pt-6 pb-2 flex flex-row justify-start items-center md:hidden">
-        <div className="flex flex-row overflow-x-scroll gap-4">
+        <div className="flex flex-row-reverse overflow-x-scroll gap-4">
           <div className="community-card flex flex-row items-center w-fit bg-lightRed text-primaryRed p-2 rounded-md">
             <div>
               <h6 className="text-sm">Community Participation</h6>
@@ -359,6 +401,36 @@ const UserDashboard = () => {
               <FaPen />
             </button>
           </div>
+
+          <div className="get-testkit-card flex flex-col items-start w-fit bg-primaryLight text-primary p-2 rounded-md">
+          <h6 className="text-sm">Get HIV self-testing kit</h6>
+          <div className="flex flex-row flex-wrap justify-between items-center mt-2">
+            <a
+              href="https://atomohivtest.com/home.php"
+              className="link text-sm mr-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Purchase test kit <FaLink />
+            </a>
+            <button
+              className="text-xs bg-white text-primary border border-primary p-2 rounded-full"
+              onClick={openModal}
+            >
+              Instruction
+            </button>
+          </div>
+
+          <TestkitInstructionModal
+            showModal={showTestkitInstructionModal}
+            closeModal={closeModal}
+            data={steps[currentIndex]}
+            currentStep={currentIndex}
+            onNext={onNext}
+            onPrev={onPrev}
+            totalSteps={steps.length}
+          />
+        </div>
         </div>
       </div>
     </div>
