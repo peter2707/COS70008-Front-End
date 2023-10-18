@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { isAuthenticated } from "../../utils/isAuthenticated";
 
 export default function HomepageHero() {
+  const [authenticated, setAuthenticated] = useState(isAuthenticated());
   return (
     <section className="hero mx-6 sm:mx-8 mb-10 sm:mb-20">
       <div className="w-full flex flex-wrap justify-center items-start py-24 sm:justify-between md:flex-nowrap">
@@ -13,10 +15,14 @@ export default function HomepageHero() {
               with a supportive community for shared experiences.
             </p>
           </div>
-          <Link to="/login" className="py-3 px-8 mt-8 rounded-full bg-primary text-white font-bold">
-            Login now
-          </Link>
-          
+          {authenticated ? null : (
+            <Link
+              to="/login"
+              className="py-3 px-8 mt-8 rounded-full bg-primary text-white font-bold"
+            >
+              Login now
+            </Link>
+          )}
         </div>
         <div className="hero-right w-full sm:max-w-lg mt-8 lg:mt-0 mx-auto">
           <img

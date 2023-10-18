@@ -9,6 +9,11 @@ import { isAuthenticated } from "../../utils/isAuthenticated";
 
 const navigation = [
   {
+    name: "Home",
+    route: "/home",
+    current: false,
+  },
+  {
     name: "Learn",
     route: "/learn",
     current: false,
@@ -35,8 +40,7 @@ const NavigationBar = () => {
 
   const dropdownItems = [
     authenticated ? { name: "Your profile", route: "/profile" } : null,
-    authenticated ? { name: "Settings", route: "/account-settings" } : null,
-    { name: "Login", route: "/login" },
+    !authenticated ? { name: "Login", route: "/login" } : null,
   ];
 
   const logout = () => {
@@ -80,7 +84,7 @@ const NavigationBar = () => {
             </div>
 
             <div className="nav-left">
-              <Link to={isAuthenticated() ? "/userdashboard" : "/home"}>
+              <Link to="/home">
                 <div className="navbar-logo">
                   <img src="logo192.png" alt="Logo" />
                   <span className="logo">Logo</span>
@@ -92,14 +96,6 @@ const NavigationBar = () => {
               <div className="hidden mx-4 sm:ml-6 sm:block">
                 <div className="flex items-center justify-end">
                   <ul className="navbar-items">
-                    <li>
-                      <Link
-                        className="px-4 md:px-6 py-9"
-                        to={isAuthenticated() ? "/userdashboard" : "/home"}
-                      >
-                        Home
-                      </Link>
-                    </li>
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <Link className="px-4 md:px-6 py-9" to={item.route}>
@@ -174,14 +170,6 @@ const NavigationBar = () => {
             <div className="nav-mobile mx-auto z-10">
               <div className="w-full text-center">
                 <ul className="navbar-items mobile">
-                  <li className="border-b py-6">
-                    <Link
-                      className="px-4 md:px-6"
-                      to={isAuthenticated() ? "/userdashboard" : "/home"}
-                    >
-                      Home
-                    </Link>
-                  </li>
                   {navigation.map((item) => (
                     <li key={item.name} className="border-b py-6">
                       <Link className="px-4 md:px-6" to={item.route}>
