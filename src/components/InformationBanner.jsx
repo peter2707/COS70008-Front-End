@@ -1,5 +1,6 @@
 import React from "react";
 import { HiInformationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export default function InformationBanner({ textBold, text, linkName, href }) {
   return (
@@ -8,7 +9,7 @@ export default function InformationBanner({ textBold, text, linkName, href }) {
       <p>
         <span className="font-semibold">{textBold}</span>
         {text}
-        <a className="link" href={href} title={linkName}>{linkName}</a>
+        <Link className="link" to={href} title={linkName}>{linkName}</Link>
       </p>
     </div>
   );
