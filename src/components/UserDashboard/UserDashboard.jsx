@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaLink, FaPen, FaCircleXmark } from "react-icons/fa6";
+import { HiCalendar, HiBookmark } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import "./UserDashboard.css";
 
 const UserDashboard = () => {
-  const [username, setUsername] = useState();
+  const [userData, setUserData] = useState({
+    name: "",
+    nextTestReminder: Date,
+    prevTestResult: {
+      dateRecorded: "",
+      result: "",
+    },
+    savedShortcuts: [],
+  });
 
   const [showModal, setShowModal] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -35,8 +45,43 @@ const UserDashboard = () => {
     return formattedDate.replace(day, dayString);
   };
 
+  // Function to format Unix timestamp to a human-readable date
+  function formatUnixTimestamp(timestamp) {
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
+
+  async function getUserData() {
+    try {
+      const response = await axios.get(
+        "https://652f221c0b8d8ddac0b23934.mockapi.io/userData"
+      );
+
+      const data = response.data[0];
+
+      setUserData({
+        name: data.username,
+        nextTestReminder: formatUnixTimestamp(data.nextTestReminder),
+        prevTestResult: {
+          dateRecorded: data.prevTestResult.dateRecorded,
+          result: data.prevTestResult.result,
+        },
+        savedShortcuts: data.savedShortcuts,
+      });
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
   useEffect(() => {
-    setUsername(localStorage.getItem("name"));
+    getUserData();
   }, []);
 
   const handleInputChange = (field, value) => {
@@ -79,21 +124,39 @@ const UserDashboard = () => {
       <div className="main-content">
         <div className="header-content">
           <h1>
-            {getGreeting()}, {username}
+            {getGreeting()}, {userData.name}
           </h1>
-          <p>{date()}</p>
+          <p className="text-lg">{date()}</p>
         </div>
         <div className="record-section">
-          <h1 className="text-primary">Next Periodic Test</h1>
-          <h3>12th December</h3>
-          <br />
-          <p>Last Recorded Test</p>
-          <p>12th June | Negative</p>
-          <br />
-          <button className="add-record-btn" onClick={() => setShowModal(true)}>
+          <div className="flex flex-col justify-center items-start">
+            <HiCalendar className="text-primary h-12 w-12 mr-2 -mt-2" />
+            <h1 className="text-primary">Next periodic test</h1>
+            <p className="text-xl">{userData.nextTestReminder}</p>
+          </div>
+
+          <div className="previous-record py-8">
+            <p className="text-primary">Previous recorded test</p>
+            <p>
+              <span className="text-gray-500">
+                {userData.prevTestResult.dateRecorded}
+              </span>{" "}
+              |{" "}
+              <span className="text-green-500">
+                {userData.prevTestResult.result}
+              </span>
+            </p>
+          </div>
+
+          <button
+            className="bg-primary text-base text-white p-2 rounded-md mr-4 mb-4 md:mb-0"
+            onClick={() => setShowModal(true)}
+          >
             Add Record
           </button>
-          <button className="download-record-btn">Download Record</button>
+          <button className="bg-white text-base text-primary p-2 rounded-md border border-primary">
+            Download Record
+          </button>
           {showModal && (
             <div className="modal-bg">
               <div className="modal-content">
@@ -186,18 +249,31 @@ const UserDashboard = () => {
             </div>
           )}
         </div>
+
         <div className="shortcut-section">
-          <button className="expand-all-btn">Expand All</button>
-          <h2>Your Shortcuts</h2>
+          <h2>Your shortcuts</h2>
           <p>Topics you bookmarked from Learn will display here</p>
-          <div className="articles">
-            {/* {articles.map((article, index) => (
-              <div key={index} className="article-card">
-                <h5>{article.title}</h5>
-                <p>{article.content}</p>
-                <button className="learn-more-btn">Learn More</button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-6">
+            {userData.savedShortcuts.map((subtopic, index) => (
+              <div key={index} className="h-52 bg-primary p-4 rounded-lg">
+                <div className="flex flex-row justify-between items-center">
+                  <h5 className="text-white mb-0">{subtopic.title}</h5>
+                  <HiBookmark className="text-white h-6 w-6" />
+                </div>
+
+                <div className="flex flex-col h-fit justify-between items-between">
+                  <p className="text-white my-4 line-clamp-3">{subtopic.description}</p>
+                  <div className="flex flex-row justify-end">
+                    <Link
+                      className="w-fit bg-white text-primary font-medium rounded-md p-2"
+                      to={subtopic.articleLink}
+                    >
+                      Learn more
+                    </Link>
+                  </div>
+                </div>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
