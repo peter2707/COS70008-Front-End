@@ -96,9 +96,9 @@ function downloadCSV(data, filename = "report.csv") {
 }
 
 function HIVForms() {
-    const testSubmissionCount = 1200;
-    const testKitPurchasedCount = 800;
-    const newCasesCount = 50;
+    const testSubmissionCount = 502;
+    const testKitPurchasedCount = 823;
+    const newCasesCount = 59;
 
     const monthlyData = {
         labels: ["January", "February", "March", "April", "May"],
@@ -284,7 +284,7 @@ function Accounts() {
 function WebTraffic() {
     const pageVisits = 154;
     const sessions = 89;
-    const avgTimeSpent = "3m 45s";
+    const avgTimeSpent = "10m 45s";
 
     const dailyPageVisitsData = {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
