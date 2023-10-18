@@ -5,6 +5,7 @@ import { HiCalendar, HiBookmark } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./UserDashboard.css";
+import DemographicQuestionnaire from "../DemographicQuestionnaire";
 
 const UserDashboard = () => {
   const [userData, setUserData] = useState({
@@ -25,6 +26,8 @@ const UserDashboard = () => {
     testResult: "",
     testImage: null,
   });
+  const [showDemographicQuestionnaire, setShowDemographicQuestionnaire] =
+    useState(false);
 
   // Generate formatted date
   const date = () => {
@@ -119,6 +122,11 @@ const UserDashboard = () => {
     if (currentHour < 18) return "Good Afternoon";
     return "Good Evening";
   };
+
+  function handleSubmitQuestionnaire() {
+    setShowDemographicQuestionnaire(false);
+    console.log("form submitted");
+  }
 
   return (
     <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto mt-24">
@@ -292,7 +300,12 @@ const UserDashboard = () => {
         <div className="community-section">
           <h6>Community Participation</h6>
           <p>Answer HIV questionaires</p>
-          <button className="answer-community-qa-btn">Start</button>
+          <button
+            className="answer-community-qa-btn"
+            onClick={() => setShowDemographicQuestionnaire(true)}
+          >
+            Start
+          </button>
         </div>
         <div className="email-notification-section">
           <button className="set-email-btn">
@@ -311,6 +324,13 @@ const UserDashboard = () => {
           </a>
         </div>
       </div>
+      {showDemographicQuestionnaire && (
+        <DemographicQuestionnaire
+          isOpen={showDemographicQuestionnaire}
+          handleSubmit={handleSubmitQuestionnaire}
+          onClose={() => setShowDemographicQuestionnaire(false)}
+        />
+      )}
 
       {/* Sidebar - Mobile */}
       <div className="sidebar-mobile bg-white w-full fixed top-24 pt-6 pb-2 flex flex-row justify-start items-center md:hidden">
@@ -323,7 +343,10 @@ const UserDashboard = () => {
               </p>
             </div>
 
-            <button className="w-fit h-fit bg-white border border-primaryRed p-0 text-xs rounded-full ml-4">
+            <button
+              className="w-fit h-fit bg-white border border-primaryRed p-0 text-xs rounded-full ml-4"
+              onClick={() => setShowDemographicQuestionnaire(true)}
+            >
               Start
             </button>
           </div>
