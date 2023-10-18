@@ -122,7 +122,7 @@ const UserDashboard = () => {
 
   return (
     <div className="dashboard-container w-full lg:max-w-screen-2xl mx-auto mt-24">
-      <div className="main-content">
+      <div className="main-content relative top-20 md:top-0">
         <div className="header-content">
           <h1>
             {getGreeting()}, {userData.name}
@@ -287,7 +287,8 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="sidebar">
+      {/* Sidebar - Desktop */}
+      <div className="sidebar-desktop w-1/5 min-w-fit bg-gray-50 p-4 rounded-xl mt-8 hidden md:block">
         <div className="community-section">
           <h6>Community Participation</h6>
           <p>Answer HIV questionaires</p>
@@ -308,6 +309,33 @@ const UserDashboard = () => {
           <a href="https://atomohivtest.com/home.php" className="purchase-link">
             Purchase test kit <FaLink />
           </a>
+        </div>
+      </div>
+
+      {/* Sidebar - Mobile */}
+      <div className="sidebar-mobile bg-white w-full fixed top-24 pt-6 pb-2 flex flex-row justify-start items-center md:hidden">
+        <div className="flex flex-row overflow-x-scroll gap-4">
+          <div className="community-card flex flex-row items-center w-fit bg-lightRed text-primaryRed p-2 rounded-md">
+            <div>
+              <h6 className="text-sm">Community Participation</h6>
+              <p className="text-xs text-gray-500 mt-2">
+                Answer HIV questionaires
+              </p>
+            </div>
+
+            <button className="w-fit h-fit bg-white border border-primaryRed p-0 text-xs rounded-full ml-4">
+              Start
+            </button>
+          </div>
+          <div className="email-notification-card flex flex-row items-center w-fit bg-lightGreen text-primaryGreen p-2 rounded-md">
+            <div>
+              <h6 className="text-sm">Email Notification</h6>
+              <p className="text-xs text-gray-500 mt-2">Every 3 months</p>
+            </div>
+            <button className="set-email-btn ml-4">
+              <FaPen />
+            </button>
+          </div>
         </div>
       </div>
     </div>
