@@ -17,7 +17,7 @@ export function Users() {
             try {
                 const token = localStorage.getItem("token");
 
-                const response = await axios.get('http://localhost:3000/admin/users', {
+                const response = await axios.get('https://my-json-server.typicode.com/peter2707/hiv_selftest_api/users', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -65,7 +65,7 @@ export function Users() {
     };
 
     const filteredUsers = displayedUsers.filter(
-        (user) => user.role === roleFilter.toLowerCase()
+        (user) => user.type === roleFilter.toLowerCase()
     );
 
     return (
@@ -111,18 +111,18 @@ export function Users() {
             <table className="users-table">
                 <thead>
                     <tr>
+                        <th>User ID</th>
                         <th>Username</th>
                         <th>Email Address</th>
-                        <th>User ID</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredUsers.map((user) => (
                         <tr key={user.id}>
+                            <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>{user.id}</td>
                             <td>
                                 <button
                                     className="edit-btn"

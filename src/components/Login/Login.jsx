@@ -66,6 +66,7 @@ export default function Login() {
             const { data } = response;
 
             const { token, name, role } = data[0];
+            localStorage.setItem("email", email);
             localStorage.setItem("token", token);
             localStorage.setItem("name", name);
             localStorage.setItem("role", role);

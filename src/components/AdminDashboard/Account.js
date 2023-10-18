@@ -1,40 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import "./Account.css";
 
 export function Account() {
     const [adminData, setAdminData] = useState({
-        id: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        role: "",
+        name: localStorage.getItem("name"),
+        email: localStorage.getItem("email"),
+        role: localStorage.getItem("role"),
     });
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
-
-    useEffect(() => {
-        const fetchAdminDetails = async () => {
-            const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get(
-                    "http://localhost:3000/admin/account-details",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                setAdminData(response.data);
-            } catch (error) {
-                console.error("Error fetching admin account details:", error);
-            }
-        };
-
-        fetchAdminDetails();
-    }, []);
 
     const handleAccountUpdate = async (e) => {
         e.preventDefault();
@@ -95,31 +71,14 @@ export function Account() {
                 <br />
                 <form onSubmit={handleAccountUpdate}>
                     <label>
-                        Admin ID:
-                        <input type="text" value={adminData.id} readOnly />
-                    </label>
-                    <label>
-                        First Name:
+                        User Name:
                         <input
                             type="text"
-                            value={adminData.firstName}
+                            value={adminData.name}
                             onChange={(e) =>
                                 setAdminData({
                                     ...adminData,
-                                    firstName: e.target.value,
-                                })
-                            }
-                        />
-                    </label>
-                    <label>
-                        Last Name:
-                        <input
-                            type="text"
-                            value={adminData.lastName}
-                            onChange={(e) =>
-                                setAdminData({
-                                    ...adminData,
-                                    lastName: e.target.value,
+                                    name: e.target.value,
                                 })
                             }
                         />
@@ -139,7 +98,7 @@ export function Account() {
                     </label>
                     <label>
                         Role:
-                        <input type="text" value={adminData.role} readOnly />
+                        <input type="text" value={adminData.role} disabled />
                     </label>
 
                     <button className="update-account-btn" type="submit">

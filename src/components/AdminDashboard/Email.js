@@ -15,7 +15,7 @@ export function Email() {
         const fetchEmailReminderUsers = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const response = await axios.get('http://localhost:3000/admin/email-reminder-users', {
+                const response = await axios.get('https://my-json-server.typicode.com/peter2707/hiv_selftest_api/emailReminders', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -76,7 +76,7 @@ export function Email() {
                         <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>{user.email}</td>
-                            <td>{user.emailFrequency}</td>
+                            <td>{user.frequency}</td>
                             <td>
                                 <button
                                     className="edit-btn"
@@ -101,8 +101,6 @@ function EditEmailFrequencyPopup({ user, onClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Logic to update the user's email frequency in the backend
-        // axios.put('UPDATE ENDPOINT HERE', { userId: user.id, emailFrequency: frequency });
         onClose();
     };
 
