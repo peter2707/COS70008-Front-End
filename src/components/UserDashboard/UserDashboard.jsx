@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaLink, FaPen, FaCircleXmark } from "react-icons/fa6";
+import { FaLink, FaPen } from "react-icons/fa6";
 import { HiCalendar, HiBookmark } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
