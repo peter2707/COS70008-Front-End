@@ -75,7 +75,7 @@ export default function Login() {
             if (role === "admin") {
                 navigate("/admindashboard");
             } else {
-                navigate("/userdashboard");
+                navigate("/profile");
             }
             return true;
         } catch (error) {

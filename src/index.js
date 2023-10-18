@@ -54,11 +54,7 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <Layout showNavbar={true} showFooter={true}>
-            {isAuthenticated() ? (
-              <Navigate to="/userdashboard" />
-            ) : (
-              <Navigate to="/home" />
-            )}
+            <Navigate to="/home" />
           </Layout>
         ),
       },
@@ -111,12 +107,12 @@ const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "userdashboard",
+        path: "profile",
         element: (
           <Layout showNavbar={true}>
             <UserDashboard />
           </Layout>
-        ),
+        )
       },
     ],
   },
