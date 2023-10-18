@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaLink, FaPen, FaCircleXmark } from "react-icons/fa6";
 import { HiCalendar, HiBookmark } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./UserDashboard.css";
 
@@ -160,8 +161,11 @@ const UserDashboard = () => {
           {showModal && (
             <div className="modal-bg">
               <div className="modal-content">
-                <button className="modal-close-btn" onClick={handleCloseModal}>
-                  <FaCircleXmark />
+                <button
+                  className="w-full flex justify-end"
+                  onClick={handleCloseModal}
+                >
+                  <IoClose className="bg-gray-100 w-fit h-8 rounded-md hover:bg-red-400 hover:text-white transition-colors duration-75" />
                 </button>
                 <h4>Add Your Test Record</h4>
                 <hr />
@@ -224,16 +228,20 @@ const UserDashboard = () => {
 
                   {formData.testImage && (
                     <div className="form-question">
-                      <input
-                        type="checkbox"
-                        id="terms"
-                        checked={acceptedTerms}
-                        onChange={() => setAcceptedTerms(!acceptedTerms)}
-                      />
-                      <label htmlFor="terms">
-                        I accept the <a href="#term">terms and conditions</a>{" "}
-                        and <a href="#privacy">privacy policy</a>.
-                      </label>
+                      <div className="flex flex-wrap justify-start items-center">
+                        <input
+                          type="checkbox"
+                          id="terms"
+                          checked={acceptedTerms}
+                          className="w-8 h-8 cursor-pointer"
+                          onChange={() => setAcceptedTerms(!acceptedTerms)}
+                        />
+                        <label htmlFor="terms">
+                          I accept the <a href="#term">terms and conditions</a>{" "}
+                          and <a href="#privacy">privacy policy</a>.
+                        </label>
+                      </div>
+
                       <br />
                       <button
                         className="submit-btn"
@@ -262,7 +270,9 @@ const UserDashboard = () => {
                 </div>
 
                 <div className="flex flex-col h-fit justify-between items-between">
-                  <p className="text-white my-4 line-clamp-3">{subtopic.description}</p>
+                  <p className="text-white my-4 line-clamp-3">
+                    {subtopic.description}
+                  </p>
                   <div className="flex flex-row justify-end">
                     <Link
                       className="w-fit bg-white text-primary font-medium rounded-md p-2"
