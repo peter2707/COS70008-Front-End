@@ -10,6 +10,7 @@ import TestkitInstructionModal from "../TestkitInstructionModal";
 import steps from "../testkitSteps.js";
 
 const UserDashboard = () => {
+  const [username, setUsername] = useState("");
   const [userData, setUserData] = useState({
     name: "",
     nextTestReminder: Date,
@@ -106,6 +107,7 @@ const UserDashboard = () => {
   }
 
   useEffect(() => {
+    setUsername(localStorage.getItem("name"));
     getUserData();
   }, []);
 
@@ -154,7 +156,7 @@ const UserDashboard = () => {
       <div className="main-content relative top-36 md:top-0">
         <div className="header-content">
           <h1>
-            {getGreeting()}, {userData.name}
+            {getGreeting()}, {username}
           </h1>
           <p className="text-lg">{date()}</p>
         </div>
@@ -345,7 +347,7 @@ const UserDashboard = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Purchase test kit <FaLink />
+              <span className="flex flex-nowrap justify-start items-center">Buy test kit <FaLink className="ml-2" /></span>
             </a>
             <button
               className="bg-white text-sm text-primary border border-primary p-2 rounded-full"
