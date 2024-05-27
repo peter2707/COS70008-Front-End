@@ -1,6 +1,6 @@
-# HIV Self Testing System - Frontend
+# Self Testing System - Frontend
 
-Welcome to the HIV Self Testing System React project! This front-end application is designed to provide users with a seamless and user-friendly experience for self-testing of HIV. Please follow the steps below to get started.
+Welcome to the Self Testing System React project! This front-end application is designed to provide users with a seamless and user-friendly experience for self-testing of HIV. Please follow the steps below to get started.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ Welcome to the HIV Self Testing System React project! This front-end application
 
     ```bash
     git clone https://github.com/peter2707/COS70008-Front-End.git
-    cd hiv-self-testing-system-frontend
+    cd COS70008-Front-End
     ```
 
 2. **Install Dependencies**
@@ -90,4 +90,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ---
 
-Thank you for being part of the HIV Self Testing System project!
+Thank you for being part of the Self Testing System project!
